@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Task 1</title>
+  <base href="/">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.min.css' %}">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous"
+    referrerpolicy="no-referrer" />
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script language="javascript" src="{% static 'js/my.js' %}"></script>
+  <script language="javascript" src="{% static 'js/chart.sample.min.js' %}"></script>
+  <script language="javascript" src="{% static 'js/chart.sample.js' %}"></script>
+  <script language="javascript" src="{% static 'js/main.js' %}"></script>
+  <script language="javascript" src="{% static 'js/main.min.js' %}"></script>
+  <script language="JavaScript">
+    $("#lanuchModal").click(function() {
+      $(".modal").addClass("is-active");
+    });
+
+    $(".modal-close").click(function() {
+       $(".modal").removeClass("is-active");
+    });
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+{% block content %}
+
+{% endblock content %}
+  </div>
+</body>
+</html>
