@@ -1,39 +1,256 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en" class="has-aside-left has-aside-mobile-transition has-navbar-fixed-top has-aside-expanded">
+<html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Task 1</title>
   <base href="/">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/my.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css.map' %}">
   <link rel="stylesheet" type="text/css"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous"
     referrerpolicy="no-referrer" />
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script language="javascript" src="{% static 'js/my.js' %}"></script>
-  <script language="javascript" src="{% static 'js/chart.sample.min.js' %}"></script>
-  <script language="javascript" src="{% static 'js/chart.sample.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.min.js' %}"></script>
   <script language="JavaScript">
-    $("#lanuchModal").click(function() {
+    $("#lanuchModal").click(function () {
       $(".modal").addClass("is-active");
     });
 
-    $(".modal-close").click(function() {
-       $(".modal").removeClass("is-active");
+    $(".modal-close").click(function () {
+      $(".modal").removeClass("is-active");
     });
   </script>
 </head>
-<body>
-<div class="container-fluid">
-{% block content %}
 
-{% endblock content %}
+<body>
+  <input type="checkbox" id="nav-toggle" />
+  <div class="sidebar">
+    <div class="sidebar-brand">
+      <h2><span></span><span>FolderPro</span></h2>
+    </div>
+
+    <div class="sidebar-menu">
+      <ul>
+        <li>
+          <a href="" class="is-active"><span class="fas fa-igloo"></span><span>Dashboard</span></a>
+        </li>
+        <li>
+          <a href=""><span class="fas fa-filter"></span><span>Filter</span></a>
+        </li>
+      </ul>
+    </div>
   </div>
+  <div class="main-content">
+    <header>
+      <div id="navbarid" class="navbar-menu">
+        <div class="navbar-start">
+          <h1>
+            <label for="nav-toggle">
+              <span class="fas fa-bars"></span>Dashboard1
+            </label>
+          </h1>
+        </div>
+        <div class="navbar-center">
+          <div class="search-wrapper">
+            <span class="fas fa-search"></span>
+            <input type="search" placeholder="Search here" />
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link is-danger is-right" href="#">
+              <strong>Project1</strong>
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="#">Profile</a>
+              <a class="navbar-item" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="cards is-12">
+        <div class="card-single is-3">
+          <div>
+            <h1>1</h1>
+            <span>Custome</span>
+          </div>
+          <div>
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+
+        <div class="card-single is-3">
+          <div>
+            <h1>1</h1>
+            <span>Custome</span>
+          </div>
+          <div>
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+
+        <div class="card-single is-3">
+          <div>
+            <h1>1</h1>
+            <span>Custome</span>
+          </div>
+          <div>
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+
+
+        <div class="card-single is-3">
+          <div>
+            <h1>1</h1>
+            <span>Custome</span>
+          </div>
+          <div>
+            <span class="fas fa-user"></span>
+          </div>
+        </div>
+      </div>
+      <div class="recent-grid">
+        <div class="projects">
+          <div class="card">
+            <div class="card-header">
+              <h2>Projects</h2>
+              <button>See all<span class="fas fa-arrow-right"></span></button>
+            </div>
+            <div class="card-body">
+              <table class="table is-hoverable is-fullwidth">
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Sample_Name</th>
+                    <th>Sample Sequence</th>
+                    <th>Flowcell</th>
+                    <th>Lane</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span class="status purple"></span>
+                      <span class="status pink"></span>
+                      <span class="status orange"></span>
+                    </td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td class="is-actions-cell">
+                      <div class="buttons">
+                        <button class="button is-small is-primary" data-tooltip="Show Image"></button><span class="icon"><i
+                              class="fas fa-image"></i></span></button>
+                        <button class="button is-small is-info" type="button"><span class="icon"><i
+                              class="fas fa-edit"></i></span></button>
+                        <button class="button is-small is-info" type="button"><span class="icon"><i
+                              class="fas fa-trash"></i></span></button>
+
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="status orange"></span>
+                      <span class="status purple"></span>
+                      <span class="status pink"></span>
+                      
+                    </td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td class="is-actions-cell">
+                      <div class="buttons">
+                        <button class="button is-small is-primary" data-tooltip="Show Image"><span class="icon"><i
+                              class="fas fa-image"></i></span></button>
+                        <button class="button is-small is-info" type="button"><span class="icon"><i
+                              class="fas fa-edit"></i></span></button>
+                        <button class="button is-small is-info" type="button"><span class="icon"><i
+                              class="fas fa-trash"></i></span></button>
+
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span class="status purple"></span>
+                      <span class="status orange"></span>
+                      <span class="status pink"></span>
+                      
+                    </td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td class="is-actions-cell">
+                      <div class="buttons">
+                        <button class="button is-small is-info" data-tooltip="Show Image" type="button"><span class="icon"><i
+                              class="fas fa-image"></i></span></button>
+                        <button class="button is-small is-info" type="button"><span class="icon"><i
+                              class="fas fa-edit"></i></span></button>
+                        <button class="button is-small is-info" type="button"><span class="icon"><i
+                              class="fas fa-trash"></i></span></button>
+
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+
+  <div class="container-fluid">
+    {% block content %}
+
+    {% endblock content %}
+  </div>
+  <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#myInput');
+
+    togglePassword.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $(".input").keyup(function () {
+        var val1 = +$("#sample_received").val();
+        var val2 = +$("#sequence").val();
+        var val3 = +$("#sampleid").val();
+        $("#pending").val(val1 - val2);
+      });
+    });
+  </script>
 </body>
+
 </html>
