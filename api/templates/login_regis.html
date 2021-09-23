@@ -1,0 +1,78 @@
+{% extends 'common.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+	<div class="columns">
+		<div class="column is-4"></div>
+		<div class="column is-4">
+			<!----Login and Signup Form----->
+			{% for msg in messages %}
+				<div class="notification is-danger">
+				  <button class="delete"></button>
+					<p>{{msg}}</p>
+				</div>
+			{% endfor %}
+			<div class="login-wrap">
+					<div class="login-html">
+						<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+						<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+						<div class="login-form">
+							<div class="sign-in-htm">
+								<form action="" method="POST">
+									{% csrf_token %}
+								<div class="group">
+									<label class="label">Username</label>
+<!--									<input id="userl" type="text" class="input">-->
+									{{login_form.username}}
+								</div>
+								<div class="group">
+									<label class="label">Password</label>
+									{{login_form.password}}
+								</div>
+								<div class="group">
+									<input id="check" type="checkbox" class="check" checked>
+									<label for="check"><span class="icon"></span> Keep me Signed in</label>
+								</div>
+								<div class="group">
+									<input type="submit" class="button" name="signin" value="SignIn">
+								</div>
+								<div class="hr"></div>
+								<div class="foot-lnk">
+									<a href="#forgot">Forgot Password?</a>
+								</div>
+							</form>
+							</div>
+							<!---   ------      Sign Up Form    ---------  -->
+							<div class="sign-up-htm">
+								<form action="" method="POST">
+									{% csrf_token %}
+									<div class="group">
+										<label  class="label">Username</label>
+										{{register_form.username}}
+									</div>
+									<div class="group">
+										<label class="label">Password</label>
+										{{register_form.password1}}
+									</div>
+									<div class="group">
+										<label class="label">Repeat Password</label>
+										{{register_form.password2}}
+									</div>
+									<div class="group">
+										<input type="submit" class="button" name="signup" value="Sign Up">
+									</div>
+								</form>
+								<div class="hr"></div>
+								<div class="foot-lnk" style="color:yellow">
+									<label for="tab-1">Already Member?</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="column is-4"></div>
+	</div>
+</div>
+
+{% endblock content %}
