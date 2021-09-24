@@ -13,6 +13,7 @@ from os import listdir
 from os.path import isfile, join
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 class CustomerRegView(View):
     def get(self, request):
         form1 = LoginForm()
@@ -26,11 +27,11 @@ class CustomerRegView(View):
                 if form.is_valid():
                     user = form.save()
                     login(request, user)
-                    messages.success(request, "Registration successful." )
+                    messages.success(request, "Registration successful.")
                     return redirect('login')
                 messages.error(request, "Unsuccessful registration. Invalid information.")
                 form = NewUserForm()
-                return render (request, 'login_regis.html', {'register_form':form})
+                return render(request, 'login_regis.html', {'register_form': form})
 
             if request.POST.get('signin'):
                 form = LoginForm(request, data=request.POST)
@@ -43,12 +44,11 @@ class CustomerRegView(View):
                         messages.info(request, f"You are now logged in as {username}.")
                         return redirect('home')
                     else:
-                        messages.error(request,"Invalid username or password.")
+                        messages.error(request, "Invalid username or password.")
                 else:
-                    messages.error(request,"Invalid username or password.")
+                    messages.error(request, "Invalid username or password.")
                 form = LoginForm()
                 return render(request, 'login_regis.html', {'login_form': form})
-
 
 
 def home(request):
@@ -66,15 +66,14 @@ def home(request):
     x = list(dirs)
     for i in x:
         sep = i.split('_')
-        res = []
-        name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date']
+        image_path = i.split('\\')
+        name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date', 'Path']
         path_time = os.path.getctime(i)
         c_ti = time.ctime(path_time)
         sep.append(c_ti)
+        sep.append(image_path[1])
         dictfile = zip(name, sep)
         newdict = dict(dictfile)
-        for ele in sep:
-            res.append(ele.split('\\'))
         data.append(newdict)
 
     # page = request.GET.get('page', 1)

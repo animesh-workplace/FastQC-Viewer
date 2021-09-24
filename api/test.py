@@ -28,32 +28,31 @@ import re
 #     ext = f"{extension:6}{count}"
 #     print("The Extension Name", type(ext))
 # Path where we have to count files and directories
+
+#              For Zipfolder subdirectiory
 HOME_FOLDER = 'E:/Python Program/FolderPro/api/static/zipfiles'
 dirfiles = os.listdir(HOME_FOLDER)
 fullpaths = map(lambda name: os.path.join(HOME_FOLDER, name), dirfiles)
-
 dirs = []
 files = []
 data = []
 for file in fullpaths:
     if os.path.isdir(file): dirs.append(file)
     if os.path.isfile(file): files.append(file)
-
+print("Fullpath Files list", dirs)
 x = list(dirs)
 for i in x:
-    print(dir(re))
-    sep = i.split('_ | \\')
-    res = []
-    name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date']
+    sep = i.split('_')
+    image_path = i.split('\\')
+    name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date', 'Path']
     path_time = os.path.getctime(i)
     c_ti = time.ctime(path_time)
     sep.append(c_ti)
+    sep.append(image_path[1])
     dictfile = zip(name, sep)
     newdict = dict(dictfile)
-    for ele in sep:
-        res.append(ele.split('\\'))
     data.append(newdict)
-    # print(sep)
+    print(sep)
 print(data)
 
 
@@ -62,23 +61,23 @@ print(data)
 # print(i)
 # print(res[4][0] == 'R2')
 # print(res[0][1] == '2240131')
-
-# files_list = [f for f in listdir('E:/Python Program/FolderPro/api/zipfiles')
-#               if isfile(join('E:/Python Program/FolderPro/api/zipfiles', f))]
-# print(files_list)
+#
+# files_list = [f for f in listdir('E:/Python Program/FolderPro/api/static/zipfiles')
+#               if isfile(join('E:/Python Program/FolderPro/api/static/zipfiles', f))]
+#  print("Before For Loop", files_list)
 # for root, dirs, files in os.walk(HOME_FOLDER):
 #     for x in dirs:
-#         print(dir(x))
+#         print(x)
 # noOfFiles = 0
 # noOfDir = 0
 #
 # for base, dirs, files in os.walk(HOME_FOLDER):
-#     print('Looking in : ', base)
-#     for directories in dirs:
-#         noOfDir += 1
-#     for Files in files:
-#         noOfFiles += 1
-#     print(dirs)
+    # print('Looking in : ', base)
+    # for directories in dirs:
+    #     noOfDir += 1
+    # for Files in files:
+    #     noOfFiles += 1
+    # print(dirs)
 #
 # print(type(files))
 # print('Number of files', noOfFiles)

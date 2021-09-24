@@ -4,168 +4,105 @@
 <main>
       <div class="recent-grid">
         <div class="projects">
-          <div class="card filterable">
+          <div class="card">
             <div class="card-header">
               <h2>Projects</h2>
               <button>See all<span class="fas fa-arrow-right"></span></button>
             </div>
-            <div class="card-body">
-              <table id="tables" class="table display is-hoverable">
-                <thead>
-                  <tr class="filters">
-                    <th>Status</th>
-                    <th>Sample_Name</th>
-                    <th>True_Sequence</th>
-                    <th>Flowcell</th>
-                    <th>Lane</th>
-                    <th>Row</th>
-                    <th>Date</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                {% for d in data %}
-                  <tr>
-                    {% if status %}
-                    <td>
-                      <span class="status green"></span>
-                      <span class="status red"></span>
-                      <span class="status orange"></span>
-                      <span class="status orange"></span>
-                      <span class="status orange"></span>
-                      <span class="status orange"></span>
-                      <span class="status orange"></span>
-                    </td>
-                    {% else %}
-                    <td>{{forloop.counter}} <span class="status orange"></span><span class="status green"></span></td>
-                    {% endif %}
-                    <td>{{d.Sample_name}}</td>
-                    <td>{{d.True_Sequence}}</td>
-                    <td>{{d.Flowcell}}</td>
-                    <td>{{d.Lane}}</td>
-                    <td>{{d.Rack}}</td>
-                    <td>{{d.Date}}</td>
-                    <td class="is-actions-cell">
-                      <div class="buttons">
-                        <!----Modal Button ---->
-                        <button class="button is-small is-primary modal-button" href="#myModal1"><span class="fas fa-image"></span></button>
+            <div class="card-body  filterable">
+                <div class="table-container">
+                    <table id="tables" class="table display is-responsive">
+                        <thead>
+                          <tr class="filters">
+                            <th>Status</th>
+                            <th>Sample_Name</th>
+                            <th>True_Sequence</th>
+                            <th>Flowcell</th>
+                            <th>Lane</th>
+                            <th>Row</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in data %}
+                          <tr>
+                            {% if status %}
+                            <td>
+                              <span class="status green"></span>
+                              <span class="status red"></span>
+                              <span class="status orange"></span>
+                              <span class="status orange"></span>
+                              <span class="status orange"></span>
+                              <span class="status orange"></span>
+                              <span class="status orange"></span>
+                            </td>
+                            {% else %}
+                            <td>{{forloop.counter}} <span class="status orange"></span><span class="status green"></span></td>
+                            {% endif %}
+                            <td>{{d.Path}}</td>
+                            <td>{{d.True_Sequence}}</td>
+                            <td>{{d.Flowcell}}</td>
+                            <td>{{d.Lane}}</td>
+                            <td>{{d.Rack}}</td>
+                            <td>{{d.Date}}</td>
+                            <td class="is-actions-cell">
+                              <div class="buttons">
+                                <!----Modal Button ---->
+                                <button class="button is-small is-primary modal-button" href="#myModal{{forloop.counter}}"><span class="fas fa-image"></span></button>
 
-                        <button class="button is-small is-info" type="button"><span class="icon"><i
-                              class="fas fa-trash"></i></span></button>
-                        <!---- Modal Code  ---->
-                        <div id="myModal1" class="model">
+                                <button class="button is-small is-info" type="button"><span class="icon"><i
+                                      class="fas fa-trash"></i></span></button>
+                                <!---- Modal Code  ---->
+                                <div id="myModal{{forloop.counter}}" class="model">
 
-                          <!-- Modal content -->
-                          <div class="model-content">
-                            <!---  Modal Start Header ---->
-                            <div class="modal-header">
-                              <span class="fas fa-times close is-small"></span>
-                              <h2>Modal Header</h2>
-                            </div>
-                            <!---  Modal End Header ---->
-                            <!---  Modal Start Body ---->
-                            <div class="modal-body">
-                              <div class="tabs-wrapper">
-                                <div class="tabs">
-                                    <ul>
-                                        <li class="is-active">
-                                          <a >All Images</a>
-                                        </li>
-                                        <li>
-                                            <a>Per base sequence quality</a>
-                                        </li>
-                                        <li>
-                                            <a>Per tile sequence quality</a>
-                                        </li>
-                                        <li>
-                                            <a>Per sequence quality scores</a>
-                                        </li>
-                                        <li>
-                                            <a>Per base sequence content</a>
-                                        </li>
-                                        <li>
-                                            <a>Per sequence GC content</a>
-                                        </li>
-                                        <li>
-                                            <a>Per base N content</a>
-                                        </li>
-                                        <li>
-                                            <a>Per sequence quality</a>
-                                        </li>
-                                        <li>
-                                            <a>Per tile quality</a>
-                                        </li>
-                                        <li>
-                                            <a>Sequence length distribution</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="tabs-content">
-                                    <ul>
-                                        <li class="is-active">
-                                            <h1>All Images</h1>
-                                            <div class="container" style="position: relative;">
-                                                <div class="columns is-12" style="position: relative;">
-                                                <div class="column is-4"><img src="{% static 'zipfiles/2240131_TruseqNano_HYGWFDSXY_L1_R2_fastqc/Images/adapter_content.png' %}"></div>
-                                                <div class="column is-4"><img src="{% static 'zipfiles/2240131_TruseqNano_HYGWFDSXY_L1_R2_fastqc/Images/duplication_levels.png' %}"></div>
-                                                <div class="column is-4"><img src="{% static 'zipfiles/2240131_TruseqNano_HYGWFDSXY_L1_R2_fastqc/Images/per_base_n_content.png' %}"></div>
-                                                <div class="column is-4"><img src="{% static 'zipfiles/2240131_TruseqNano_HYGWFDSXY_L1_R2_fastqc/Images/per_base_quality.png' %}"></div>
+                                  <!-- Modal content -->
+                                  <div class="model-content">
+                                    <!---  Modal Start Header ---->
+                                    <div class="modal-header">
+                                      <span class="fas fa-times close is-small"></span>
+                                      <h2>Modal Header</h2>
+                                    </div>
+                                    <!---  Modal End Header ---->
+                                    <!---  Modal Start Body ---->
+                                    <div class="modal-body">
+                                      <div class="tabs-wrapper">
+                                          <div class="tabs-content">   
+                                            <h1>All Image of {{d.Path}}</h1>
+                                              <div class="gallery">
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/adapter_content.png" data-lightbox="mygallery" data-title="Adapter Content" ><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/adapter_content.png"></a>
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/duplication_levels.png" data-lightbox="mygallery" data-title="Duplication Levels"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/duplication_levels.png"></a>
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_n_content.png" data-lightbox="mygallery" data-title="Per Base n Content"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_n_content.png"></a>
+                                                        
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_quality.png" data-lightbox="mygallery" data-title="Per Base Quality"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_quality.png"></a>
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_sequence_content.png" data-lightbox="mygallery" data-title="Per Base Sequence Content"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_sequence_content.png"></a>
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_gc_content.png" data-lightbox="mygallery" data-title="Per Sequence GC Content"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_gc_content.png"></a>
+                                                       
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_quality.png" data-lightbox="mygallery" data-title="Per Sequence Quality"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_quality.png"></a>
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_tile_quality.png" data-lightbox="mygallery" data-title="Per Tile Quality"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_tile_quality.png"></a>
+                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/sequence_length_distribution.png" data-lightbox="mygallery" data-title="Sequence Length Distribution"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/sequence_length_distribution.png"></a>
+                                                        
                                               </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <h1>Per base sequence quality</h1>
-                                            <img>
-                                        </li>
-                                        <li>
-                                            <h1>Per tile sequence quality</h1>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!---  Modal End Body ---->
 
-                                        </li>
-                                        <li>
-                                            <h1>Per sequence quality scores</h1>
-                                        </li>
-                                        <li>
-                                            <h1>Per base sequence content</h1>
-                                        </li>
-                                        <li>
-                                            <h1>Per sequence GC content</h1>
-                                        </li>
-                                        <li>
-                                            <h1>Per base N content</h1>
-                                        </li>
-                                        <li>
-                                            <h1>Per sequence quality</h1>
-                                        </li>
-                                        <li>
-                                            <h1>Per tile quality</h1>
-                                        </li>
-                                        <li>
-                                            <h1>Sequence length distribution</h1>
-                                        </li>
-                                        <li>
-                                            <h1>All</h1>
-                                        </li>
-                                    </ul>
+                                    <!---  Modal Footer ---->
+                                    <div class="modal-footer">
+                                      <h3>Modal Footer</h3>
+                                    </div>
+                                  </div>
+
                                 </div>
-                            </div>
-                            </div>
-                            <!---  Modal End Body ---->
-                            <!---  Modal Footer ---->
-                            <div class="modal-footer">
-                              <h3>Modal Footer</h3>
-                            </div>
-                          </div>
-
-                        </div>
-                        <!---- Modal Close --->
-                      </div>
-                    </td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-              
+                                <!---- Modal Close --->
+                              </div>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
           </div>
         </div>

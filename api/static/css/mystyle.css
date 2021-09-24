@@ -461,3 +461,18 @@ td .status{
 thead input {
 	width: 100%;
 }
+
+/*  for image css  */
+.gallery{
+	margin: 10px 50px;
+}
+.gallery img{
+	transition: 1s;
+	padding: 20px;
+	width: 300px;
+	height: 200px;
+}
+.gallery img:hover{
+	filter: grayscale(100%);
+	transform: scale(1.1);
+}
