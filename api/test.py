@@ -1,6 +1,7 @@
 from zipfile import ZipFile
 import os
 import time
+import glob
 from os import listdir
 from os.path import isfile, join
 from collections import Counter
@@ -30,33 +31,61 @@ import re
 # Path where we have to count files and directories
 
 #              For Zipfolder subdirectiory
+import forloop as forloop
+
 HOME_FOLDER = 'E:/Python Program/FolderPro/api/static/zipfiles'
 dirfiles = os.listdir(HOME_FOLDER)
 fullpaths = map(lambda name: os.path.join(HOME_FOLDER, name), dirfiles)
 dirs = []
 files = []
 data = []
+text_list = []
 for file in fullpaths:
     if os.path.isdir(file): dirs.append(file)
     if os.path.isfile(file): files.append(file)
 print("Fullpath Files list", dirs)
+
 x = list(dirs)
+# for path, dirs, f in os.walk(HOME_FOLDER):
+#     # print(path)
+#     print("Files", f)
+
 for i in x:
     sep = i.split('_')
+    os.chdir(i)
+    text_file = glob.glob('*.txt')
+
     image_path = i.split('\\')
-    name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date', 'Path']
+    name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date', 'Path',
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11']
     path_time = os.path.getctime(i)
     c_ti = time.ctime(path_time)
     sep.append(c_ti)
     sep.append(image_path[1])
+    # print(text_file[1])
+    for f in text_file:
+        outfile = open(f, 'r')
+        read_file = outfile.read().split()
+        outfile.close()
+        # print(read_file)
+    sep.append(read_file[0])
+    sep.append(read_file[4])
+    sep.append(read_file[10])
+    sep.append(read_file[16])
+    sep.append(read_file[22])
+    sep.append(read_file[28])
+    sep.append(read_file[34])
+    sep.append(read_file[40])
+    sep.append(read_file[45])
+    sep.append(read_file[50])
+    sep.append(read_file[54])
     dictfile = zip(name, sep)
     newdict = dict(dictfile)
     data.append(newdict)
+    text_read = (read_file[0], read_file[4], read_file[10], read_file[16], read_file[22],
+                 read_file[28], read_file[34], read_file[40], read_file[45], read_file[50], read_file[54])
     print(sep)
 print(data)
-
-
-
 
 # print(i)
 # print(res[4][0] == 'R2')
@@ -64,20 +93,17 @@ print(data)
 #
 # files_list = [f for f in listdir('E:/Python Program/FolderPro/api/static/zipfiles')
 #               if isfile(join('E:/Python Program/FolderPro/api/static/zipfiles', f))]
-#  print("Before For Loop", files_list)
-# for root, dirs, files in os.walk(HOME_FOLDER):
-#     for x in dirs:
-#         print(x)
+# print("Before For Loop", files_list)
 # noOfFiles = 0
 # noOfDir = 0
 #
 # for base, dirs, files in os.walk(HOME_FOLDER):
-    # print('Looking in : ', base)
-    # for directories in dirs:
-    #     noOfDir += 1
-    # for Files in files:
-    #     noOfFiles += 1
-    # print(dirs)
+# print('Looking in : ', base)
+# for directories in dirs:
+#     noOfDir += 1
+# for Files in files:
+#     noOfFiles += 1
+# print(dirs)
 #
 # print(type(files))
 # print('Number of files', noOfFiles)

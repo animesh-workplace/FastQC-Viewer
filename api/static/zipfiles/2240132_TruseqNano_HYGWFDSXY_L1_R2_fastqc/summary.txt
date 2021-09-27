@@ -4,8 +4,8 @@ PASS	Per tile sequence quality	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
 PASS	Per sequence quality scores	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
 PASS	Per base sequence content	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
 WARN	Per sequence GC content	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
-PASS	Per base N content	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
-PASS	Sequence Length Distribution	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
-PASS	Sequence Duplication Levels	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
-PASS	Overrepresented sequences	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
+WARN	Per base N content	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
+WARN	Sequence Length Distribution	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
+WARN	Sequence Duplication Levels	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
+FAIL	Overrepresented sequences	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz
 PASS	Adapter Content	2240131_TruseqNano_HYGWFDSXY_L1_R2.fastq.gz

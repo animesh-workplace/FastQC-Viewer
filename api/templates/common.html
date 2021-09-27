@@ -29,7 +29,22 @@
   <script language="javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/lightbox.js' %}"></script>
-
+<style>
+  
+/* Status Icon CSS */
+.status.FAIL{
+  background: url('{% static "img/error.png" %}');
+  background-repeat: no-repeat;
+}
+.status.WARN{
+	background: url('{% static "img/warning.png" %}');
+  background-repeat: no-repeat;  
+}
+.status.PASS{
+  background-repeat: no-repeat;
+  background-image: url('{% static "img/tick.png" %}');
+}
+</style>
 </head>
 
 <body>
@@ -76,7 +91,16 @@
     {% endblock content %}
   </div>
 {% endif %}
-
+<footer>
+  <div class="container is-fluid is-mobile pt-5" style="margin-top:20px;">
+    <div class="columns">
+      <div class="column is-12 has-background-danger has-text-centered">
+        <h4 class="text is-2 is-center" style="font-weight: bold; color: white;"> Copyright | 2021 @ Design & Developed By <span style="color: yellow;">NIBMG --
+          Employees</span> </h4>
+      </div>
+    </div>
+  </div>
+</footer>
 
   <script>
     const togglePassword = document.querySelector('#togglePassword');
