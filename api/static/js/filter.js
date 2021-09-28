@@ -22,9 +22,9 @@ $(document).ready(function () {
                         $(api.column(colIdx).header()).index()
                     );
                     var title = $(cell).text();
-                    $(cell).html('<input type="text" id="search_box" placeholder="' + title + '" />');
+                    $(cell).html('<input type="text" id="search_box" placeholder="Search Here" />');
  
-                    // On every keypress in this input
+                    // On every keypress in this input  + title +
                     $(
                         'input',
                         $('.filters th').eq($(api.column(colIdx).header()).index())

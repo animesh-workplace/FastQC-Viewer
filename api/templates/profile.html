@@ -11,17 +11,17 @@
             </div>
             <div class="card-body  filterable">
                 <div class="table-container">
-                    <table id="tables" class="table display is-responsive">
+                    <table id="tables" class="table display is-responsive" style="border: 1px;">
                         <thead>
                           <tr class="filters">
-                            <th>Status</th>
+                            <th></th>
                             <th>Sample_Name</th>
                             <th>True_Sequence</th>
                             <th>Flowcell</th>
                             <th>Lane</th>
                             <th>Row</th>
                             <th>Date</th>
-                            <th>Actions</th>
+                            <th>Modal</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -29,17 +29,17 @@
                           <tr>
 
                             <td class="flex-container">
-                                <span class="status {{d.1}}"></span>
-                                <span class="status {{d.2}}"></span>
-                                <span class="status {{d.3}}"></span>
-                                <span class="status {{d.4}}"></span>
-                                <span class="status {{d.5}}"></span>
-                                <span class="status {{d.6}}"></span>
-                                <span class="status {{d.7}}"></span>
-                                <span class="status {{d.8}}"></span>
-                                <span class="status {{d.9}}"></span>
-                                <span class="status {{d.10}}"></span>
-                                <span class="status {{d.11}}"></span>
+                                <span class="status {{d.1}} tooltips"><span class="tooltipstatus">Basic Statistics</span></span>
+                                <span class="status {{d.2}} tooltips"><span class="tooltipstatus">Per base sequence quality</span></span>
+                                <span class="status {{d.3}} tooltips"><span class="tooltipstatus">Per tile sequence quality</span></span>
+                                <span class="status {{d.4}} tooltips"><span class="tooltipstatus">Per sequence quality scores</span></span>
+                                <span class="status {{d.5}} tooltips"><span class="tooltipstatus">Per base sequence content</span></span>
+                                <span class="status {{d.6}} tooltips"><span class="tooltipstatus">Per sequence GC content</span></span>
+                                <span class="status {{d.7}} tooltips"><span class="tooltipstatus">Per base N content</span></span>
+                                <span class="status {{d.8}} tooltips"><span class="tooltipstatus">Sequence Length Distribution</span></span>
+                                <span class="status {{d.9}} tooltips"><span class="tooltipstatus">Sequence Duplication Levels</span></span>
+                                <span class="status {{d.10}} tooltips"><span class="tooltipstatus">Overrepresented sequences</span></span>
+                                <span class="status {{d.11}} tooltips"><span class="tooltipstatus">Adapter Content</span></span>
                             </td>
 
                             <td>{{d.Sample_name}}</td>
@@ -53,8 +53,8 @@
                                 <!----Modal Button ---->
                                 <button class="button is-small is-primary modal-button" href="#myModal{{forloop.counter}}"><span class="fas fa-image"></span></button>
 
-                                <button class="button is-small is-info" type="button"><span class="icon"><i
-                                      class="fas fa-trash"></i></span></button>
+                                <!-- <button class="button is-small is-info" type="button"><span class="icon"><i
+                                      class="fas fa-trash"></i></span></button> -->
                                 <!---- Modal Code  ---->
                                 <div id="myModal{{forloop.counter}}" class="model">
 
@@ -69,21 +69,80 @@
                                     <!---  Modal Start Body ---->
                                     <div class="modal-body">
                                       <div class="tabs-wrapper">
+                                        <h1 style="margin-bottom: 20px;">All Image of {{d.Path}}</h1>
                                           <div class="tabs-content">   
-                                            <h1>All Image of {{d.Path}}</h1>
                                               <div class="gallery">
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/adapter_content.png" data-lightbox="mygallery" data-title="Adapter Content" ><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/adapter_content.png"></a>
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/duplication_levels.png" data-lightbox="mygallery" data-title="Duplication Levels"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/duplication_levels.png"></a>
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_n_content.png" data-lightbox="mygallery" data-title="Per Base n Content"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_n_content.png"></a>
-                                                        
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_quality.png" data-lightbox="mygallery" data-title="Per Base Quality"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_quality.png"></a>
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_sequence_content.png" data-lightbox="mygallery" data-title="Per Base Sequence Content"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_sequence_content.png"></a>
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_gc_content.png" data-lightbox="mygallery" data-title="Per Sequence GC Content"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_gc_content.png"></a>
-                                                       
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_quality.png" data-lightbox="mygallery" data-title="Per Sequence Quality"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_quality.png"></a>
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_tile_quality.png" data-lightbox="mygallery" data-title="Per Tile Quality"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_tile_quality.png"></a>
-                                                  <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/sequence_length_distribution.png" data-lightbox="mygallery" data-title="Sequence Length Distribution"><img src="{% static 'zipfiles' %}/{{d.Path}}/Images/sequence_length_distribution.png"></a>
-                                                        
+                                                <div class="row flex-container">
+                                                   <!-- Image gallery -->
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.1}}"></span><span class="tooltiptext">Image 1</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/adapter_content.png" data-lightbox="mygallery" data-title="Adapter Content" >
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/adapter_content.png">
+                                                    </a>
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.2}}"></span><span class="tooltiptext">Image 2</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/duplication_levels.png" data-lightbox="mygallery" data-title="Duplication Levels">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/duplication_levels.png">
+                                                    </a>                                           
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.3}}"></span><span class="tooltiptext">Image 3</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_n_content.png" data-lightbox="mygallery" data-title="Per Base n Content">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_n_content.png">
+                                                    </a>       
+                                                  </div>
+                                                </div>
+                                                 
+                                                <div class="row flex-container">
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.4}}"></span><span class="tooltiptext">Image 4</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_quality.png" data-lightbox="mygallery" data-title="Per Base Quality">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_quality.png">
+                                                    </a>
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.5}}"></span><span class="tooltiptext">Image 5</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_sequence_content.png" data-lightbox="mygallery" data-title="Per Base Sequence Content">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_base_sequence_content.png">
+                                                    </a>  
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.6}}"></span><span class="tooltiptext">Image 6</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_gc_content.png" data-lightbox="mygallery" data-title="Per Sequence GC Content">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_gc_content.png">
+                                                    </a> 
+                                                  </div>
+                                                </div>  
+                                                <div class="row flex-container">
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.7}}"></span><span class="tooltiptext">Image 7</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_quality.png" data-lightbox="mygallery" data-title="Per Sequence Quality">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_sequence_quality.png">
+                                                    </a>
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.8}}"></span><span class="tooltiptext">Image 8</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/per_tile_quality.png" data-lightbox="mygallery" data-title="Per Tile Quality">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/per_tile_quality.png">
+                                                    </a>
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image {{d.9}}"></span><span class="tooltiptext">Image 9</span></h3>
+                                                    <a href="{% static 'zipfiles' %}/{{d.Path}}/Images/sequence_length_distribution.png" data-lightbox="mygallery" data-title="Sequence Length Distribution">
+                                                      <img src="{% static 'zipfiles' %}/{{d.Path}}/Images/sequence_length_distribution.png">
+                                                    </a>
+                                                  </div>
+                                                </div>   
+                                                <div class="row flex-container">
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image  {{d.10}}"></span><span class="tooltiptext">Image 10</span></h3>
+                                                  </div>
+                                                  <div class="column tooltip">
+                                                    <h3><span class="image  {{d.11}}"></span><span class="tooltiptext">Image 11</span></h3>
+                                                  </div>
+                                                </div> 
+                                                         
                                               </div>
                                         </div>
                                       </div>
