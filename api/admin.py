@@ -21,6 +21,6 @@ class Data1ModelAdmin(admin.ModelAdmin):
 
 @admin.register(Data2)
 class Data2ModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'DNA', 'FFPE', 'RNA', 'FastQc', 'SEQUENCE', 'Sample_name', 'Tru_Sequence',
+    list_display = ['id', 'Sequence', 'FastQc', 'Sample_name', 'Path_name', 'Tru_Sequence',
                     'Flowcell', 'Lane', 'Row', 'BS', 'PBSQ', 'PTSQ', 'PSQS', 'PBSC', 'PSGC', 'PBNC',
-                    'SLD', 'SDL', 'OS', 'AC']
+                    'SLD', 'SDL', 'OS', 'AC', 'Total_Sequence', 'Sequence_length', 'GC']

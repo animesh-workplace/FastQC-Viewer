@@ -26,19 +26,30 @@
                      <!--      Table Print        -->
               <table class="table">
                   <thead>
-                    <tr>
+                    <tr style="text-align:center">
                         <th>ID</th>
                         <th>Patient</th>
-                        <th>Sequence1</th>
-                        <th>Sequence2</th>
-                        <th>Sequence3</th>
+
+                        {% for j in smp %}
+                            <th style="position:absolute; margin-left:90px;">{{j.Sequence}}</th>
+                            <th></th>
+                        {% endfor%}
+
                     </tr>
                   </thead>
                   <tbody>
                   {% for ptd in patient %}
-                       <tr>
+                       <tr class="" style="text-align:center">
                            <th>{{forloop.counter}}</th>
                            <th>{{ptd.Patient}}</th>
+                           {% for s in sqt %}
+                                {% if ptd.Patient == s.Patient%}
+                                   <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+                                       {{s.Sequence}}<a href="{% url 'samplename' s.Samplename %}">{{s.Samplename}}</a>
+                                   </td>
+                                {%else%}
+                                {% endif %}
+                           {% endfor %}
                        </tr>
                   {% endfor %}
                   </tbody>

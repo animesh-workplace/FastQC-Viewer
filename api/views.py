@@ -1,4 +1,4 @@
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Max
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
@@ -291,25 +291,14 @@ class HomeView(View):
             return render(request, 'profile.html', {'prodata': prodata})
 
         if pt is not None:
-            print(pt)
             patient = Data1.objects.filter(Project=pt).values('Patient').distinct()
-            sqdt = patient.values('Sequence').distinct()
-            print(sqdt)
-
+            ptd_dat = patient.values('Patient', 'Sequence', 'Samplename').distinct()
+            newptd = patient.values('Sequence').distinct()
             prodata = Data1.objects.values('Project').distinct()
-            return render(request, 'profile.html', {'prodata': prodata, 'patient': patient})
+            return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
+                                                    'sqt': ptd_dat, 'smp': newptd})
 
 
-
-
-
-
-# def patientd(request, pt):
-#     if pt is not None:
-#         Ptd = Data1.objects.filter(Patient=pt)
-#         newptd = Ptd.values('Patient').annotate(Sequence_count=Count('Patient')).filter(Sequence_count__gte=1)
-#         data = ProjectTable.objects.all()
-#         prodata = ProjectTable.objects.values('Project').annotate(
-#             Project_count=Count('Project')).filter(Project_count__gte=1)
-#         ptd1 = Ptd.values('Sequence').annotate(Sequence_count=Count('Sequence')).filter(Sequence_count__gte=1)
-#     return render(request, 'profile.html', {'pt': newptd, 'pt1': ptd1, 'prodata': prodata, 'col': data})
+def show_data(request, data):
+    pass
+    return render(request, 'profile.html')

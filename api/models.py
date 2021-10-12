@@ -26,12 +26,10 @@ class Data1(models.Model):
 
 
 class Data2(models.Model):
-    DNA = models.CharField(max_length=200)
-    FFPE = models.CharField(max_length=200)
-    RNA = models.CharField(max_length=200)
+    Sequence = models.CharField(choices=SEQUENCE_CHOICE, max_length=100)
     FastQc = models.CharField(max_length=200)
-    SEQUENCE = models.CharField(max_length=200)
     Sample_name = models.CharField(max_length=200)
+    Path_name = models.CharField(max_length=200)
     Tru_Sequence = models.CharField(max_length=200)
     Flowcell = models.CharField(max_length=200)
     Lane = models.CharField(max_length=200)
@@ -47,6 +45,9 @@ class Data2(models.Model):
     SDL = models.CharField(max_length=200)
     OS = models.CharField(max_length=200)
     AC = models.CharField(max_length=200)
+    Total_Sequence = models.CharField(max_length=200)
+    Sequence_length = models.CharField(max_length=200)
+    GC = models.CharField(max_length=200)
 
     def __str__(self):
         return str(self.id)
