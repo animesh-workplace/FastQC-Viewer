@@ -13,109 +13,139 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/filter.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css.map' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/fixedHeader.dataTables.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.dataTables.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/lightbox.min.css' %}">
   <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bm/dt-1.11.2/datatables.min.css"/>
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
-  <script type="text/javascript" src="https://cdn.datatables.net/v/bm/dt-1.11.2/datatables.min.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+  <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <script language="javascript" src="{% static 'js/my.js' %}"></script>
+  <script language="javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
   <script language="javascript" src="{% static 'js/filter.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.js' %}"></script>
-  <script language="javascript" src="{% static 'js/dataTables.fixedHeader.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/lightbox.js' %}"></script>
-<style>
-  
-/* Status Icon CSS */
-.status.FAIL{
-  background: url('{% static "img/error.png" %}');
-  background-repeat: no-repeat;
-}
-.status.WARN{
-	background: url('{% static "img/warning.png" %}');
-  background-repeat: no-repeat;  
-}
-.status.PASS{
-  background-repeat: no-repeat;
-  background-image: url('{% static "img/tick.png" %}');
-}
-h3 .image.PASS{
-  margin-left: 50%;
-  background-repeat: no-repeat;
-  background-image: url('{% static "img/tick.png" %}');
-}
-h3 .image.WARN{
-  margin-left: 50%;
-  background-repeat: no-repeat;
-  background-image: url('{% static "img/warning.png" %}');
-}
-h3 .image.FAIL{
-  margin-left: 50%;
-  background-repeat: no-repeat;
-  background-image: url('{% static "img/error.png" %}');
-}
-</style>
+  <style>
+    /* Status Icon CSS */
+
+    h3 .image.PASS {
+      margin-left: 50%;
+      background-repeat: no-repeat;
+      background-image: url('{% static "img/tick.png" %}');
+    }
+
+    h3 .image.WARN {
+      margin-left: 50%;
+      background-repeat: no-repeat;
+      background-image: url('{% static "img/warning.png" %}');
+    }
+
+    h3 .image.FAIL {
+      margin-left: 50%;
+      background-repeat: no-repeat;
+      background-image: url('{% static "img/error.png" %}');
+    }
+
+    td .status-PASS p {
+      background-color: green;
+      border-radius: 8px;
+      padding: 3px 5px;
+      color: white;
+      font-weight: bold;
+    }
+
+    td .status-WARN p {
+      background-color: orange;
+      border-radius: 8px;
+      padding: 3px 5px;
+      color: black;
+      font-weight: bold;
+    }
+
+    td .status-FAIL p {
+      background-color: red;
+      border-radius: 8px;
+      padding: 3px 5px;
+      color: White;
+      font-weight: bold;
+    }
+
+    tr td {
+      font-size: 5px;
+      margin-left: -10px;
+    }
+
+    table.dataTable td {
+      text-align: center;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 
 <body>
-{% if request.user.is_authenticated %}
- 
-<nav class="navbar is-fixed-top box-shadow-y">
-  <div class="navbar-brand toggler">
-    <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'home' %}">
-      <i class="fas fa-home icon" style="margin-top:10px;"></i>Home
-    </a>
-    <a class="navbar-burger nav-toggler" aria-expanded="false" data-target="#navbarid">
-      <span></span>
-      <span></span>
-      <span></span>
-    </a>
+  {% if request.user.is_authenticated %}
 
-  </div>
-  <div id="navbarid" class="navbar-menu">
-    <div class="navbar-start">
+  <nav class="navbar is-fixed-top box-shadow-y">
+    <div class="navbar-brand toggler">
+      <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'home' %}">
+        <i class="fas fa-home icon" style="margin-top:10px;"></i>Home
+      </a>
+
+      <a class="navbar-burger nav-toggler" aria-expanded="false" data-target="#navbarid">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
 
     </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link is-danger is-right">
-          <strong>{{user}}</strong>
+    <div id="navbarid" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'project' %}">
+        Project
         </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="#">Profile</a>
-          <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'patient' %}">
+        Patient
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link is-danger is-right">
+            <strong>{{user}}</strong>
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="#">Profile</a>
+            <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+          </div>
         </div>
       </div>
     </div>
+  </nav>
+  <div class="container-fluid">
+    {% block main %}
+    {% endblock main %}
   </div>
-</nav>
-<div class="container-fluid">
-{% block main %}
-{% endblock main %}
-</div>
-{% else %}
+  {% else %}
   <div class="container-fluid">
     {% block content %}
 
     {% endblock content %}
   </div>
-{% endif %}
-<footer>
-  <div class="container is-fluid is-mobile pt-5" style="margin-top:20px;">
-    <div class="columns">
-      <div class="column is-12 has-background-danger has-text-centered">
-        <h4 class="text is-2 is-center" style="font-weight: bold; color: white;"> Copyright | 2021 @ Design & Developed By <span style="color: yellow;">NIBMG --
-          Employees</span> </h4>
+  {% endif %}
+  <footer>
+    <div class="container is-fluid is-mobile pt-5" style="margin-top:20px;">
+      <div class="columns">
+        <div class="column is-12 has-background-danger has-text-centered">
+          <h4 class="text is-2 is-center" style="font-weight: bold; color: white;"> Copyright | 2021 @ Design &
+            Developed By <span style="color: yellow;">NIBMG --
+              Employees</span> </h4>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
   <script>
     const togglePassword = document.querySelector('#togglePassword');
@@ -133,6 +163,20 @@ h3 .image.FAIL{
     var cl = document.getElementByClass('close');
   </script>
   <script language="javascript" src="{% static 'js/modal.js' %}"></script>
+  <script>
+    const startDate = document.getElementById("dateFrom");
+    const endDate = document.getElementById("dateTo");
+    function filterDateArray() {
+      const dates = ['2021-10-23', '2021-10-24', '2021-10-25', '2021-10-26', '2021-10-27', '2021-10-28', '2021-10-29', '2021-10,30'];
+      filteredDate = dates.filter(dataFilter);
+      function dataFilter(date) {
+        return date >= startDate.value && date <= endDate.value;
+      }
+      console.log(filteredDate);
+    }
+
+  </script>
+
 </body>
 
 </html>

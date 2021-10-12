@@ -20,7 +20,8 @@ class NewUserForm(UserCreationForm):
         model = User
         fields = ['username', 'password1', 'password2']
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'input', 'type': 'text', 'id': 'userl', 'placeholder': 'Enter UserName'})}
+            'username': forms.TextInput(
+                attrs={'class': 'input', 'type': 'text', 'id': 'userl', 'placeholder': 'Enter UserName'})}
 
 
 # 		if commit:
@@ -34,3 +35,8 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(
         attrs={'autocomplete': 'current-password', 'class': 'input', 'data-type': 'password', 'id': 'passl',
                'placeholder': 'Enter Your Password'}))
+
+
+class FilterForm(forms.Form):
+    date1 = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'dateFrom', 'type': 'date'}))
+    date2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'dateTo', 'type': 'date'}))
