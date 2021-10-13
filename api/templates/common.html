@@ -86,8 +86,9 @@
 </head>
 
 <body>
-  {% if request.user.is_authenticated %}
 
+  {% if request.user.is_authenticated %}
+  
   <nav class="navbar is-fixed-top box-shadow-y">
     <div class="navbar-brand toggler">
       <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'home' %}">
@@ -103,13 +104,10 @@
     </div>
     <div id="navbarid" class="navbar-menu">
       <div class="navbar-start">
-        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'project' %}">
-        Project
-        </a>
         <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'patient' %}">
         Patient
         </a>
-        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="#">
+        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'main' %}">
         Data
         </a>
       </div>
@@ -139,7 +137,7 @@
   </div>
   {% endif %}
   <footer>
-    <div class="container is-fluid is-mobile pt-5" style="margin-top:20px;">
+    <div class="container is-fixed-bottom is-fluid is-mobile pt-5" style="margin-top:250px;">
       <div class="columns">
         <div class="column is-12 has-background-danger has-text-centered">
           <h4 class="text is-2 is-center" style="font-weight: bold; color: white;"> Copyright | 2021 @ Design &

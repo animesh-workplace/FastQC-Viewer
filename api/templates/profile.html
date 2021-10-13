@@ -27,14 +27,14 @@
               <table class="table">
                   <thead>
                     <tr style="text-align:center">
+                        {% if smp %}
                         <th>ID</th>
                         <th>Patient</th>
-
                         {% for j in smp %}
                             <th style="position:absolute; margin-left:90px;">{{j.Sequence}}</th>
                             <th></th>
                         {% endfor%}
-
+                        {% endif %}
                     </tr>
                   </thead>
                   <tbody>
@@ -45,7 +45,7 @@
                            {% for s in sqt %}
                                 {% if ptd.Patient == s.Patient%}
                                    <td style="font-size:15px; font-weight:bold; display:flex-inline;">
-                                       {{s.Sequence}}<a href="{% url 'samplename' s.Samplename %}">{{s.Samplename}}</a>
+                                       {{s.Sequence}}<a href="{% url 'show' s.Sequence s.Samplename %}">{{s.Samplename}}</a>
                                    </td>
                                 {%else%}
                                 {% endif %}
@@ -58,4 +58,58 @@
           </div>
       </div>
   </div>
+{% if sample %}
+<div class="container">
+    <div class="row">
+        <div class="columns">
+            <div class="column flex-container">
+                <h3>{{sqc}} / {{spp}}</h3>
+                <table class="table" style="text-align:center;">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>BS</th>
+                        <th>PBSQ</th>
+                        <th>PTSQ</th>
+                        <th>PSQS</th>
+                        <th>PBSC</th>
+                        <th>PSGC</th>
+                        <th>PBNC</th>
+                        <th>SLD</th>
+                        <th>SDL</th>
+                        <th>OS</th>
+                        <th>AC</th>
+                        <th>Total Sequence</th>
+                        <th>Sequence Length</th>
+                        <th>%GC</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for sp in sample%}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{sp.BS}}</td>
+                        <td>{{sp.PBSQ}}</td>
+                        <td>{{sp.PTSQ}}</td>
+                        <td>{{sp.PSQS}}</td>
+                        <td>{{sp.PBSC}}</td>
+                        <td>{{sp.PSGC}}</td>
+                        <td>{{sp.PBNC}}</td>
+                        <td>{{sp.SLD}}</td>
+                        <td>{{sp.SDL}}</td>
+                        <td>{{sp.OS}}</td>
+                        <td>{{sp.AC}}</td>
+                        <td>{{sp.Total_Sequence}}</td>
+                        <td>{{sp.Sequence_length}}</td>
+                        <td>{{sp.GC}}</td>
+                    </tr>
+                    {% endfor%}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
 {% endblock main %}
