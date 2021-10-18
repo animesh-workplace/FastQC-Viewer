@@ -136,8 +136,7 @@ def data_store(request):
                                Tru_Sequence=trusqc, Flowcell=flowcell, Lane=lane, Row=row, BS=bs, PBSQ=pbsq,
                                PTSQ=ptsq, PSQS=psqs, PBSC=pbsc, PSGC=psgc, PBNC=pbnc, SLD=sld, SDL=sdl, OS=oss,
                                AC=ac, Total_Sequence=tsqc, Sequence_length=sqclth, GC=gc)
-                    messages.success(request, 'New Dat Updated Congratulations!!!!!')
-                    print("Save Path")
+                    st.save()
         return render(request, 'profile.html')
 
 @csrf_exempt 
@@ -198,12 +197,13 @@ def patient_data(request):
                     sequence = s1[7]
                     fastqcfol = s1[8]
                     samplename = s1[9]
+                    sample = s1[9][4:]
                     if Data1.objects.filter(
                             Q(Patient=patient) & Q(Sequence=sequence) & Q(Samplename=samplename)).exists():
                         messages.success(request, 'New Data Not be updated ')
                     else:
                         insert = Data1(Project=project, Patient=patient, Sequence=sequence, Fastqcfol=fastqcfol,
-                                       Samplename=samplename)
+                                       Samplename=samplename, Sample=sample)
                         insert.save()
                         messages.success(request, 'New Entery Upload Successfully !!!!')
         return render(request, 'profile.html')
@@ -255,7 +255,7 @@ class HomeView(View):
 
         if pt is not None:
             patient = Data1.objects.filter(Project=pt).values('Patient').distinct()
-            ptd_dat = patient.values('Patient', 'Sequence', 'Samplename').distinct()
+            ptd_dat = patient.values('Patient', 'Sequence', 'Samplename', 'Sample').distinct()
             newptd = patient.values('Sequence').distinct()
             prodata = Data1.objects.values('Project').distinct()
             return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
@@ -271,6 +271,3 @@ def show_data(request, data=None, data1=None):
         prodata = Data1.objects.values('Project').distinct()
         return render(request, 'profile.html', {'prodata': prodata, 'sample': sample, 'sqc': data, 'spp': data1})
 
-    # prodata = Data1.objects.values('Project').distinct()
-    # return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
-    #                                         'sqt': ptd_dat, 'smp': newptd})

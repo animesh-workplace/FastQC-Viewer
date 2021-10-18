@@ -20,6 +20,7 @@ class Data1(models.Model):
     Sequence = models.CharField(choices=SEQUENCE_CHOICE, max_length=100)
     Fastqcfol = models.CharField(max_length=100)
     Samplename = models.CharField(max_length=100)
+    Sample = models.CharField(max_length=100)
 
     def __str__(self):
         return str(self.id)

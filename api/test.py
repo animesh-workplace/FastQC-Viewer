@@ -62,6 +62,7 @@ for i in x:
     y4 = list(fastqc_path)
     last_path = []
     for l in y4:
+        print(l)
         fast_qc = os.listdir(l)
         fast_fol = map(lambda name: os.path.join(l, name), fast_qc)
         path2 = []
@@ -80,6 +81,7 @@ for i in x:
             os.getcwd()
     y6 = list(sample_path)
     for o in y6:
+        print(o)
         os.chdir(o)
         text_file = glob.glob('*.txt')
         image_path = o.split('\\')
@@ -107,10 +109,10 @@ for i in x:
         image_path.append(fastqc_file[21])
         image_path.append(fastqc_file[30])
         image_path.append(fastqc_file[32])
-        print(image_path[7], image_path[8], image_path[9], image_path[10], image_path[12], image_path[13],
-              image_path[14], image_path[15], image_path[17], image_path[18], image_path[19], image_path[20],
-              image_path[21], image_path[22], image_path[23], image_path[24], image_path[25], image_path[26],
-              image_path[27], image_path[28], image_path[29], image_path[30])
+        print(image_path[7], image_path[8], image_path[9], image_path[10], image_path[11][4:], image_path[12],
+              image_path[13], image_path[14], image_path[15], image_path[17], image_path[18], image_path[19],
+              image_path[20], image_path[21], image_path[22], image_path[23], image_path[24], image_path[25],
+              image_path[26], image_path[27], image_path[28], image_path[29], image_path[30])
 
 #     for o in y:
 #         os.chdir(o)

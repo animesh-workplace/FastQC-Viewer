@@ -16,7 +16,7 @@ class ProjectTableModelAdmin(admin.ModelAdmin):
 
 @admin.register(Data1)
 class Data1ModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'Project', 'Patient', 'Sequence', 'Fastqcfol', 'Samplename']
+    list_display = ['id', 'Project', 'Patient', 'Sequence', 'Fastqcfol', 'Samplename', 'Sample']
 
 
 @admin.register(Data2)
