@@ -40,3 +40,22 @@ class LoginForm(AuthenticationForm):
 class FilterForm(forms.Form):
     date1 = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'dateFrom', 'type': 'date'}))
     date2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'dateTo', 'type': 'date'}))
+
+
+class EditForm(forms.Form):
+    bs = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    pbsq = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    ptsq = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    psqs = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    pbsc = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    psgc = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    pbnc = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    sld = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    sdl = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    oss = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    ac = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    tsequence = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    sqlenth = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    gc = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    lane = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))
+    row = forms.CharField(widget=forms.TextInput(attrs={'class': 'input', 'id': 'editform', 'type': 'text'}))

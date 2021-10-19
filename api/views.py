@@ -1,10 +1,11 @@
 from django.db.models import Q, Count, Max
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from api.forms import LoginForm, NewUserForm, FilterForm
+from api.forms import LoginForm, NewUserForm, EditForm, FilterForm
 from backend.settings import BASE_DIR, MEDIA_URL
 from .models import Data1, Data2
 from zipfile import ZipFile
@@ -14,10 +15,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Main Code
-@csrf_exempt 
+@csrf_exempt
 def data_store(request):
     if request.user.is_authenticated:
-        path_file = os.path.join(BASE_DIR / 'media/project')
+        path_file = os.path.join(BASE_DIR / 'media/Project')
         dirfiles = os.listdir(path_file)
         fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
         dirs = []
@@ -25,11 +26,8 @@ def data_store(request):
             if os.path.isdir(file): dirs.append(file)
             os.getcwd()
         x = list(dirs)  #########   x is user Path find
-        user = []  ########  All User List
         for i in x:
             project_path = os.listdir(i)
-            users = i.split('\\')
-            user.append(users[5])
             folder_project = map(lambda name: os.path.join(i, name), project_path)
             fll = []
             for profolder in folder_project:
@@ -37,7 +35,7 @@ def data_store(request):
                 os.getcwd()
             y1 = list(fll)
             path_list_all = []  ########  Path_list_all contain All Genome (DNA, RNA, FFPC)
-            for j in y1:  #####  J is 240, 245 and 101, 102  print
+            for j in y1:
                 prounder_path = os.listdir(j)
                 pro_folder = map(lambda name: os.path.join(j, name), prounder_path)
                 path = []
@@ -81,8 +79,8 @@ def data_store(request):
             for o in y6:
                 os.chdir(o)
                 text_file = glob.glob('*.txt')
-                image_path = o.split('\\')
-                new_split = image_path[10].split('_')
+                image_path = o.split('/')
+                new_split = image_path[12].split('_')
                 image_path.append(new_split[0])
                 image_path.append(new_split[1])
                 image_path.append(new_split[2])
@@ -106,28 +104,28 @@ def data_store(request):
                 image_path.append(fastqc_file[21])
                 image_path.append(fastqc_file[30])
                 image_path.append(fastqc_file[32])
-                sequence = image_path[7]
-                fastqc = image_path[8]
-                samplename = image_path[9]
-                pathname = image_path[10]
-                trusqc = image_path[12]
-                flowcell = image_path[13]
-                lane = image_path[14]
-                row = image_path[15]
-                bs = image_path[17]
-                pbsq = image_path[18]
-                ptsq = image_path[19]
-                psqs = image_path[20]
-                pbsc = image_path[21]
-                psgc = image_path[22]
-                pbnc = image_path[23]
-                sld = image_path[24]
-                sdl = image_path[25]
-                oss = image_path[26]
-                ac = image_path[27]
-                tsqc = image_path[28]
-                sqclth = image_path[29]
-                gc = image_path[30]
+                sequence = image_path[9]
+                fastqc = image_path[10]
+                samplename = image_path[11]
+                pathname = image_path[12]
+                trusqc = image_path[14]
+                flowcell = image_path[15]
+                lane = image_path[16]
+                row = image_path[17]
+                bs = image_path[19]
+                pbsq = image_path[20]
+                ptsq = image_path[21]
+                psqs = image_path[22]
+                pbsc = image_path[23]
+                psgc = image_path[24]
+                pbnc = image_path[25]
+                sld = image_path[26]
+                sdl = image_path[27]
+                oss = image_path[28]
+                ac = image_path[29]
+                tsqc = image_path[30]
+                sqclth = image_path[31]
+                gc = image_path[32]
                 if Data2.objects.filter(Q(Sequence=sequence) & Q(Sample_name=samplename) &
                                         Q(Lane=lane) & Q(Row=row)).exists():
                     messages.success(request, 'New Data Not Updated All Data are Present')
@@ -139,10 +137,11 @@ def data_store(request):
                     st.save()
         return render(request, 'profile.html')
 
-@csrf_exempt 
+
+@csrf_exempt
 def patient_data(request):
     if request.user.is_authenticated:
-        path_file = os.path.join(BASE_DIR / 'media/project')
+        path_file = os.path.join(BASE_DIR / 'media/Project')
         dirfiles = os.listdir(path_file)
         fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
         dirs = []
@@ -150,19 +149,16 @@ def patient_data(request):
             if os.path.isdir(file): dirs.append(file)
             os.getcwd()
         x = list(dirs)
-        user = []
         for i in x:
             project_path = os.listdir(i)
-            users = i.split('\\')
-            user.append(users[5])
             folder_project = map(lambda name: os.path.join(i, name), project_path)
             fll = []
             for profolder in folder_project:
                 if os.path.isdir(profolder): fll.append(profolder)
                 os.getcwd()
             y1 = list(fll)
-            path_list_all = []  ########  Path_list_all contain All Genome (DNA, RNA, FFPC)
-            for j in y1:  #####  J is 240, 245 and 101, 102  print
+            path_list_all = []
+            for j in y1:
                 prounder_path = os.listdir(j)
                 pro_folder = map(lambda name: os.path.join(j, name), prounder_path)
                 path = []
@@ -184,20 +180,22 @@ def patient_data(request):
                 for s in path1:
                     fastqc_path.append(s)
             y4 = list(fastqc_path)
+            last_path = []
             for l in y4:
                 fast_qc = os.listdir(l)
                 fast_fol = map(lambda name: os.path.join(l, name), fast_qc)
                 path2 = []
                 for l1 in fast_fol:
-                    if os.path.isdir(l1): path2.append(l1.split('\\'))
+                    if os.path.isdir(l1): path2.append(l1.split('/'))
                     os.getcwd()
                 for s1 in path2:
-                    project = s1[5]
-                    patient = s1[6]
-                    sequence = s1[7]
-                    fastqcfol = s1[8]
-                    samplename = s1[9]
-                    sample = s1[9][4:]
+                    last_path.append(s1)
+                    project = s1[7]
+                    patient = s1[8]
+                    sequence = s1[9]
+                    fastqcfol = s1[10]
+                    samplename = s1[11]
+                    sample = s1[11][4:]
                     if Data1.objects.filter(
                             Q(Patient=patient) & Q(Sequence=sequence) & Q(Samplename=samplename)).exists():
                         messages.success(request, 'New Data Not be updated ')
@@ -210,12 +208,13 @@ def patient_data(request):
 
 
 class CustomerRegView(View):
-    @csrf_exempt 
+    @csrf_exempt
     def get(self, request):
         form1 = LoginForm()
         form2 = NewUserForm()
         return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
-    @csrf_exempt 
+
+    @csrf_exempt
     def post(self, request):
         if request.method == "POST":
             if request.POST.get('signup'):
@@ -255,19 +254,28 @@ class HomeView(View):
 
         if pt is not None:
             patient = Data1.objects.filter(Project=pt).values('Patient').distinct()
-            ptd_dat = patient.values('Patient', 'Sequence', 'Samplename', 'Sample').distinct()
-            newptd = patient.values('Sequence').distinct()
+            ptd_dat = patient.values('Project', 'Patient', 'Sequence', 'Samplename', 'Sample').distinct()
+            newptd = patient.values('Sequence').distinct()  # Sequence Send
             prodata = Data1.objects.values('Project').distinct()
             return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
                                                     'sqt': ptd_dat, 'smp': newptd})
 
-@csrf_exempt 
-def show_data(request, data=None, data1=None):
-    if data is None and data1 is None:
+
+@csrf_exempt
+def show_data(request, dt=None, pt=None, data=None, data1=None):
+    if dt is None and data is None and data1 is None:
         prodata = Data1.objects.values('Project').distinct()
         return render(request, {'prodata': prodata})
-    if data is not None and data1 is not None:
+    if dt is not None and data is not None and data1 is not None:
         sample = Data2.objects.filter(Q(Sequence=data) & Q(Sample_name=data1))
         prodata = Data1.objects.values('Project').distinct()
-        return render(request, 'profile.html', {'prodata': prodata, 'sample': sample, 'sqc': data, 'spp': data1})
+        form = EditForm()
+        return render(request, 'profile.html', {'prodata': prodata, 'sample': sample, 'pro': dt, 'pt': pt,
+                                                'sqc': data, 'spp': data1, 'editform': form})
 
+
+def delete(request, id):
+    if request.method == 'GET':
+        dl = Data2.objects.get(pk=id)
+        dl.delete()
+        return HttpResponseRedirect('/')

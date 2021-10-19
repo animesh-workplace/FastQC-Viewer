@@ -16,7 +16,7 @@ from os.path import isfile, join
 from backend.settings import BASE_DIR, MEDIA_URL
 
 
-path_file = os.path.join(BASE_DIR / 'media/project')
+path_file = os.path.join(BASE_DIR / 'media/Project')
 dirfiles = os.listdir(path_file)
 fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
 dirs = []
@@ -26,11 +26,8 @@ for file in fullpaths:
     if os.path.isdir(file): dirs.append(file)
     os.getcwd()
 x = list(dirs)  #########   x is user Path find
-user = []   ########  All User List
 for i in x:
     project_path = os.listdir(i)
-    users = i.split('\\')
-    user.append(users[5])
     folder_project = map(lambda name: os.path.join(i, name), project_path)
     fll = []
     for profolder in folder_project:
@@ -38,7 +35,7 @@ for i in x:
         os.getcwd()
     y1 = list(fll)
     path_list_all = [] ########  Path_list_all contain All Genome (DNA, RNA, FFPC)
-    for j in y1:   #####  J is 240, 245 and 101, 102  print
+    for j in y1:
         prounder_path = os.listdir(j)
         pro_folder = map(lambda name: os.path.join(j, name), prounder_path)
         path = []
@@ -62,7 +59,6 @@ for i in x:
     y4 = list(fastqc_path)
     last_path = []
     for l in y4:
-        print(l)
         fast_qc = os.listdir(l)
         fast_fol = map(lambda name: os.path.join(l, name), fast_qc)
         path2 = []
@@ -81,11 +77,10 @@ for i in x:
             os.getcwd()
     y6 = list(sample_path)
     for o in y6:
-        print(o)
         os.chdir(o)
         text_file = glob.glob('*.txt')
-        image_path = o.split('\\')
-        new_split = image_path[10].split('_')
+        image_path = o.split('/')
+        new_split = image_path[12].split('_')
         image_path.append(new_split[0])
         image_path.append(new_split[1])
         image_path.append(new_split[2])
@@ -109,10 +104,10 @@ for i in x:
         image_path.append(fastqc_file[21])
         image_path.append(fastqc_file[30])
         image_path.append(fastqc_file[32])
-        print(image_path[7], image_path[8], image_path[9], image_path[10], image_path[11][4:], image_path[12],
-              image_path[13], image_path[14], image_path[15], image_path[17], image_path[18], image_path[19],
-              image_path[20], image_path[21], image_path[22], image_path[23], image_path[24], image_path[25],
-              image_path[26], image_path[27], image_path[28], image_path[29], image_path[30])
+        print(image_path[9], image_path[10], image_path[11], image_path[12], image_path[13][4:], image_path[15],
+              image_path[16], image_path[17], image_path[18], image_path[19], image_path[20], image_path[21],
+              image_path[22], image_path[23], image_path[24], image_path[25], image_path[26], image_path[27],
+              image_path[28], image_path[29], image_path[30], image_path[31], image_path[32])
 
 #     for o in y:
 #         os.chdir(o)

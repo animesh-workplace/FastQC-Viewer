@@ -13,5 +13,6 @@ urlpatterns = [
     path('profile/<str:dt>/<str:pt>/<str:data>/<str:data1>', views.show_data, name="show"),
     path('patient/', views.patient_data, name="patient"),
     path('data/', views.data_store, name="main"),
+    path('delete/<int:id>', views.delete, name="deleted"),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

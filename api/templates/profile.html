@@ -150,36 +150,13 @@
                             <td>{{sp.Lane}}</td>
                             <td>{{sp.Row}}</td>
                             <td>
-                                <button class="button is-small is-warning modal-button" href="#myForm{{forloop.counter}}">Edit</span></button>
-                                <div id="myForm{{forloop.counter}}" class="model">
-
-                                      <!-- Modal content -->
-                                      <div class="model-content">
-                                        <!---  Modal Start Header ---->
-                                        <div class="modal-header">
-                                          <span class="fas fa-times close is-small"></span>
-                                          <h2>Modal Header</h2>
-                                        </div>
-                                        <!---  Modal End Header ---->
-                                        <!---  Modal Start Body ---->
-                                        <div class="modal-body">
-
-                                        </div>
-                                        <!---  Modal End Body ---->
-
-                                        <!---  Modal Footer ---->
-                                        <div class="modal-footer">
-                                          <h3>Modal Footer</h3>
-                                        </div>
-                                      </div>
-
-                                    </div>
+                                <a type="button" class="button is-small is-danger" href="{% url 'deleted' sp.id %}">Delete</a>
                             </td>
                             <td class="is-actions-cell flex-container">
                                   <div class="buttons ">
                                     <!----Modal Button ---->
 
-                                    <button class="button is-small is-primary modal-button" href="#myModal{{forloop.counter}}"><span class="fas fa-image"></span></button>
+                                    <button class="button is-small is-info modal-button" href="#myModal{{forloop.counter}}">Show</button>
 
                                     <!---- Modal Code  ---->
                                     <div id="myModal{{forloop.counter}}" class="model">

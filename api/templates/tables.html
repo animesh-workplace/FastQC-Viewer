@@ -158,3 +158,109 @@
       </div>
 
     </main>
+
+
+
+                                                   <!--   Update Model for Forlder Project    -->
+                            <td>
+                                <button class="button is-small is-warning modal-button" data-toggle="modal"
+                                   href="#myForm{{forloop.counter}}">Edit</span></button>
+                                <div id="myForm{{forloop.counter}}" class="model">
+
+                                      <!-- Modal content -->
+                                      <div class="model-content" style="width:60%">
+                                        <!---  Modal Start Header ---->
+                                        <div class="modal-header">
+                                          <span class="fas fa-times close is-small" style="margin-top:5px;"></span>
+                                          <h2>Modal Form</h2>
+                                        </div>
+                                        <!---  Modal End Header ---->
+                                        <!---  Modal Start Body ---->
+                                        <div class="modal-body">
+                                            <form method="post" action="">
+                                                {% csrf_token %}
+                                                <div class="columns">
+                                                    <div class="column">
+                                                        <div class="group">
+                                                            <label class="label">BS</label>
+                                                            {{editform.bs}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">PBSQ</label>
+                                                            {{editform.pbsq}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">PTSQ</label>
+                                                            {{editform.ptsq}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">PSQS</label>
+                                                            {{editform.psqs}}
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="group">
+                                                            <label class="label">PBSC</label>
+                                                            {{editform.pbsc}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">PSGC</label>
+                                                            {{editform.psgc}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">PBNC</label>
+                                                            {{editform.pbnc}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">SLD</label>
+                                                            {{editform.sld}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="group">
+                                                            <label class="label">SDL</label>
+                                                            {{editform.sdl}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">OS</label>
+                                                            {{editform.oss}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">AC</label>
+                                                            {{editform.ac}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">Total Seq</label>
+                                                            {{editform.tsequence}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="column">
+                                                        <div class="group">
+                                                            <label class="label">Sequence Length</label>
+                                                            {{editform.sqlenth}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">%GC</label>
+                                                            {{editform.gc}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">Lane</label>
+                                                            {{editform.lane}}
+                                                        </div>
+                                                        <div class="group">
+                                                            <label class="label">Row</label>
+                                                            {{editform.row}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                               <div class="group">
+                                                    <input type="submit" class="button is-danger" name="edit" value="Update"
+                                                           style="border-radius:50px;">
+                                               </div>
+                                            </form>
+                                         </div>
+                                        <!---  Modal End Body ---->
+                                      </div>
+                                    </div>
+                            </td>

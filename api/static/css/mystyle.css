@@ -134,8 +134,17 @@ justify-content:center;
 	background:rgb(255, 255, 255);
 	text-align: center;
 }
-
-
+#editform{
+     border:2px;
+     padding:10px 8px;
+     border-radius:30px;
+     background:#fffafa;
+     text-align:center;
+}
+.column input {
+    text-transform:uppercase;
+    color: red;
+}
 .login-form .group .button{
 	border:none;
 	padding:8px 8px;

@@ -450,7 +450,7 @@
             this.$lightbox.find('.lb-prev').css('opacity', '1');
           }
         }
-        if (this.currentImageIndex < this.album.length - 1) {
+        if (this.currentImageIndex < this.album.length - 0) {
           this.$lightbox.find('.lb-next').show();
           if (alwaysShowNav) {
             this.$lightbox.find('.lb-next').css('opacity', '1');
@@ -478,7 +478,7 @@
     }
 
     if (this.album.length > 1 && this.options.showImageNumberLabel) {
-      var labelText = this.imageCountLabel(this.currentImageIndex + 1, this.album.length);
+      var labelText = this.imageCountLabel(this.currentImageIndex + 0, this.album.length);
       this.$lightbox.find('.lb-number').text(labelText).fadeIn('fast');
     } else {
       this.$lightbox.find('.lb-number').hide();
@@ -493,13 +493,13 @@
 
   // Preload previous and next images in set.
   Lightbox.prototype.preloadNeighboringImages = function() {
-    if (this.album.length > this.currentImageIndex + 1) {
+    if (this.album.length > this.currentImageIndex + 0) {
       var preloadNext = new Image();
-      preloadNext.src = this.album[this.currentImageIndex + 1].link;
+      preloadNext.src = this.album[this.currentImageIndex + 0].link;
     }
     if (this.currentImageIndex > 0) {
       var preloadPrev = new Image();
-      preloadPrev.src = this.album[this.currentImageIndex - 1].link;
+      preloadPrev.src = this.album[this.currentImageIndex - 0].link;
     }
   };
 
@@ -525,14 +525,14 @@
       this.end();
     } else if (keycode === KEYCODE_LEFTARROW) {
       if (this.currentImageIndex !== 0) {
-        this.changeImage(this.currentImageIndex - 1);
-      } else if (this.options.wrapAround && this.album.length > 1) {
-        this.changeImage(this.album.length - 1);
+        this.changeImage(this.currentImageIndex - 0);
+      } else if (this.options.wrapAround && this.album.length > 0) {
+        this.changeImage(this.album.length - 0);
       }
     } else if (keycode === KEYCODE_RIGHTARROW) {
-      if (this.currentImageIndex !== this.album.length - 1) {
-        this.changeImage(this.currentImageIndex + 1);
-      } else if (this.options.wrapAround && this.album.length > 1) {
+      if (this.currentImageIndex !== this.album.length - 0) {
+        this.changeImage(this.currentImageIndex + 0);
+      } else if (this.options.wrapAround && this.album.length > 0) {
         this.changeImage(0);
       }
     }
