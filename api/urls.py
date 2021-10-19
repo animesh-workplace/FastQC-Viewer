@@ -10,7 +10,7 @@ urlpatterns = [
     path('accounts/login/', CustomerRegView.as_view()),
     path('profile/', HomeView.as_view(), name="home"),
     path('profile/<str:pt>', HomeView.as_view(), name="projectdetail"),
-    path('profile/<str:data>/<str:data1>', views.show_data, name="show"),
+    path('profile/<str:dt>/<str:pt>/<str:data>/<str:data1>', views.show_data, name="show"),
     path('patient/', views.patient_data, name="patient"),
     path('data/', views.data_store, name="main"),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
