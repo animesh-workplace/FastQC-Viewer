@@ -27,6 +27,13 @@
   <script language="javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/lightbox.js' %}"></script>
+  {% if messages %}
+   <script>
+    {% for message in messages %}
+        alert("{{ message }}");
+    {% endfor %}
+   </script>
+{% endif %}
   <style>
     /* Status Icon CSS */
 

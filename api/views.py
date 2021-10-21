@@ -130,13 +130,14 @@ def data_store(request):
                 gc = new_path[27]
                 if Data2.objects.filter(Q(Sequence=sequence) & Q(Sample_name=samplename) &
                                         Q(Lane=lane) & Q(Row=row)).exists():
-                    messages.success(request, 'New Data Not Updated All Data are Present')
+                    pass
                 else:
                     st = Data2(Sequence=sequence, FastQc=fastqc, Sample_name=samplename, Path_name=pathname,
                                Tru_Sequence=trusqc, Flowcell=flowcell, Lane=lane, Row=row, BS=bs, PBSQ=pbsq,
                                PTSQ=ptsq, PSQS=psqs, PBSC=pbsc, PSGC=psgc, PBNC=pbnc, SLD=sld, SDL=sdl, OS=oss,
                                AC=ac, Total_Sequence=tsqc, Sequence_length=sqclth, GC=gc)
                     st.save()
+        messages.success(request, "Data Uploaded !!!!!")
         return render(request, 'profile.html')
 
 
@@ -200,12 +201,12 @@ def patient_data(request):
                     sample = new_path[6][4:]
                     if Data1.objects.filter(
                             Q(Patient=patient) & Q(Sequence=sequence) & Q(Samplename=samplename)).exists():
-                        messages.success(request, 'New Data Not be updated ')
+                        pass
                     else:
                         insert = Data1(Project=project, Patient=patient, Sequence=sequence, Fastqcfol=fastqcfol,
                                        Samplename=samplename, Sample=sample)
                         insert.save()
-                        messages.success(request, 'New Entery Upload Successfully !!!!')
+        messages.success(request, "Work Done !!!!!!!")
         return render(request, 'profile.html')
 
 
@@ -223,7 +224,7 @@ class CustomerRegView(View):
                 form = NewUserForm(request.POST)
                 if form.is_valid():
                     user = form.save()
-                    messages.success(request, "Registration successful.")
+                    messages.success(request, "Registration successful. !!!!1")
                     return redirect('login')
                 else:
                     messages.error(request, "Unsuccessful registration. Invalid information.")
@@ -239,6 +240,7 @@ class CustomerRegView(View):
                     user = authenticate(username=username, password=password)
                     if user is not None:
                         login(request, user)
+                        messages.success(request, "Welcome you are loggedin.")
                         return redirect('home')
                     else:
                         messages.error(request, "Invalid username or password.")

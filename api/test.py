@@ -104,10 +104,14 @@ for i in x:
         image_path.append(fastqc_file[21])
         image_path.append(fastqc_file[30])
         image_path.append(fastqc_file[32])
-        print(image_path[9], image_path[10], image_path[11], image_path[12], image_path[13][4:], image_path[15],
-              image_path[16], image_path[17], image_path[18], image_path[19], image_path[20], image_path[21],
-              image_path[22], image_path[23], image_path[24], image_path[25], image_path[26], image_path[27],
-              image_path[28], image_path[29], image_path[30], image_path[31], image_path[32])
+        # print(image_path[9], image_path[10], image_path[11], image_path[12], image_path[13][4:], image_path[15],
+        #       image_path[16], image_path[17], image_path[18], image_path[19], image_path[20], image_path[21],
+        #       image_path[22], image_path[23], image_path[24], image_path[25], image_path[26], image_path[27],
+        #       image_path[28], image_path[29], image_path[30], image_path[31], image_path[32])
+        main_path = image_path.index('media')
+        new_path = image_path[main_path:]
+        print(new_path)
+
 
 #     for o in y:
 #         os.chdir(o)
