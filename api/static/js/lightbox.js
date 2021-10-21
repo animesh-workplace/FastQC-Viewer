@@ -1,16 +1,3 @@
-/*!
- * Lightbox v2.11.3
- * by Lokesh Dhakar
- *
- * More info:
- * http://lokeshdhakar.com/projects/lightbox2/
- *
- * Copyright Lokesh Dhakar
- * Released under the MIT license
- * https://github.com/lokesh/lightbox2/blob/master/LICENSE
- *
- * @preserve
- */
 
 // Uses Node, AMD or browser globals to create a module.
 (function (root, factory) {
@@ -42,14 +29,14 @@
   // http://lokeshdhakar.com/projects/lightbox2/index.html#options
   Lightbox.defaults = {
     albumLabel: 'Image %1 of %2',
-    alwaysShowNavOnTouchDevices: false,
-    fadeDuration: 300,
+    alwaysShowNavOnTouchDevices: true,
+    fadeDuration: 100,
     fitImagesInViewport: true,
-    imageFadeDuration: 300,
+    imageFadeDuration: 100,
     // maxWidth: 800,
     // maxHeight: 600,
-    positionFromTop: 50,
-    resizeDuration: 700,
+    positionFromTop: 250,
+    resizeDuration: 300,
     showImageNumberLabel: false,
     wrapAround: false,
     disableScrolling: true,
@@ -61,7 +48,7 @@
     If the caption data is user submitted or from some other untrusted source, then set this to true
     to prevent xss and other injection attacks.
      */
-    sanitizeTitle: false
+    sanitizeTitle: true
   };
 
   Lightbox.prototype.option = function(options) {
@@ -173,19 +160,7 @@
       return false;
     });
 
-    /*
-      Show context menu for image on right-click
 
-      There is a div containing the navigation that spans the entire image and lives above of it. If
-      you right-click, you are right clicking this div and not the image. This prevents users from
-      saving the image or using other context menu actions with the image.
-
-      To fix this, when we detect the right mouse button is pressed down, but not yet clicked, we
-      set pointer-events to none on the nav div. This is so that the upcoming right-click event on
-      the next mouseup will bubble down to the image. Once the right-click/contextmenu event occurs
-      we set the pointer events back to auto for the nav div so it can capture hover and left-click
-      events as usual.
-     */
     this.$nav.on('mousedown', function(event) {
       if (event.which === 3) {
         self.$nav.css('pointer-events', 'none');
@@ -365,13 +340,6 @@
   // Stretch overlay to fit the viewport
   Lightbox.prototype.sizeOverlay = function() {
     var self = this;
-    /*
-    We use a setTimeout 0 to pause JS execution and let the rendering catch-up.
-    Why do this? If the `disableScrolling` option is set to true, a class is added to the body
-    tag that disables scrolling and hides the scrollbar. We want to make sure the scrollbar is
-    hidden before we measure the document width, as the presence of the scrollbar will affect the
-    number.
-    */
     setTimeout(function() {
       self.$overlay
         .width($(document).width())

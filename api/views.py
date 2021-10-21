@@ -34,7 +34,7 @@ def data_store(request):
                 if os.path.isdir(profolder): fll.append(profolder)
                 os.getcwd()
             y1 = list(fll)
-            path_list_all = []  ########  Path_list_all contain All Genome (DNA, RNA, FFPC)
+            path_list_all = []
             for j in y1:
                 prounder_path = os.listdir(j)
                 pro_folder = map(lambda name: os.path.join(j, name), prounder_path)
@@ -104,28 +104,30 @@ def data_store(request):
                 image_path.append(fastqc_file[21])
                 image_path.append(fastqc_file[30])
                 image_path.append(fastqc_file[32])
-                sequence = image_path[9]
-                fastqc = image_path[10]
-                samplename = image_path[11]
-                pathname = image_path[12]
-                trusqc = image_path[14]
-                flowcell = image_path[15]
-                lane = image_path[16]
-                row = image_path[17]
-                bs = image_path[19]
-                pbsq = image_path[20]
-                ptsq = image_path[21]
-                psqs = image_path[22]
-                pbsc = image_path[23]
-                psgc = image_path[24]
-                pbnc = image_path[25]
-                sld = image_path[26]
-                sdl = image_path[27]
-                oss = image_path[28]
-                ac = image_path[29]
-                tsqc = image_path[30]
-                sqclth = image_path[31]
-                gc = image_path[32]
+                main_path = image_path.index('media')
+                new_path = image_path[main_path:]
+                sequence = new_path[4]
+                fastqc = new_path[5]
+                samplename = new_path[6]
+                pathname = new_path[7]
+                trusqc = new_path[9]
+                flowcell = new_path[10]
+                lane = new_path[11]
+                row = new_path[12]
+                bs = new_path[14]
+                pbsq = new_path[15]
+                ptsq = new_path[16]
+                psqs = new_path[17]
+                pbsc = new_path[18]
+                psgc = new_path[19]
+                pbnc = new_path[20]
+                sld = new_path[21]
+                sdl = new_path[22]
+                oss = new_path[23]
+                ac = new_path[24]
+                tsqc = new_path[25]
+                sqclth = new_path[26]
+                gc = new_path[27]
                 if Data2.objects.filter(Q(Sequence=sequence) & Q(Sample_name=samplename) &
                                         Q(Lane=lane) & Q(Row=row)).exists():
                     messages.success(request, 'New Data Not Updated All Data are Present')
@@ -180,7 +182,6 @@ def patient_data(request):
                 for s in path1:
                     fastqc_path.append(s)
             y4 = list(fastqc_path)
-            last_path = []
             for l in y4:
                 fast_qc = os.listdir(l)
                 fast_fol = map(lambda name: os.path.join(l, name), fast_qc)
@@ -189,13 +190,14 @@ def patient_data(request):
                     if os.path.isdir(l1): path2.append(l1.split('/'))
                     os.getcwd()
                 for s1 in path2:
-                    last_path.append(s1)
-                    project = s1[7]
-                    patient = s1[8]
-                    sequence = s1[9]
-                    fastqcfol = s1[10]
-                    samplename = s1[11]
-                    sample = s1[11][4:]
+                    main_path = s1.index('media')
+                    new_path = s1[main_path:]
+                    project = new_path[2]
+                    patient = new_path[3]
+                    sequence = new_path[4]
+                    fastqcfol = new_path[5]
+                    samplename = new_path[6]
+                    sample = new_path[6][4:]
                     if Data1.objects.filter(
                             Q(Patient=patient) & Q(Sequence=sequence) & Q(Samplename=samplename)).exists():
                         messages.success(request, 'New Data Not be updated ')

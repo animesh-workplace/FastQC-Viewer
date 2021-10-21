@@ -129,7 +129,8 @@ justify-content:center;
 }
 #search_box{
 	border:2px black;
-	padding:5px;
+	padding-left:5px;
+	margin-left:-5px;
 	border-radius:30px;
 	background:rgb(255, 255, 255);
 	text-align: center;
@@ -141,10 +142,7 @@ justify-content:center;
      background:#fffafa;
      text-align:center;
 }
-.column input {
-    text-transform:uppercase;
-    color: red;
-}
+
 .login-form .group .button{
 	border:none;
 	padding:8px 8px;
@@ -585,35 +583,9 @@ thead input {
   }
 
   /* Table Heading Tooltips */
-  .table-head{
-	position: relative;
-  }
-  .table-head .heading{
-	visibility: hidden;
-	width: 120px;
-	background-color: black;
-	color: #fff;
-	text-align: center;
-	border-radius: 6px;
-	padding: 5px 0;
-	position: absolute;
-	z-index: 1;
-	bottom: 100%;
-	margin-left: -50px;
-	
 
-  }
-  .table-head .heading::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	margin-left: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: black transparent transparent transparent;
-  }
-  .table-head:hover .heading{
-	  visibility: visible;
-  }
 
+/*   footer Css   */
+.container-fluid{
+    min-height:75vh;
+}

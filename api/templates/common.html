@@ -19,7 +19,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 
-
   <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <script language="javascript" src="{% static 'js/my.js' %}"></script>
   <script language="javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
@@ -130,19 +129,21 @@
     {% endblock main %}
   </div>
   {% else %}
-  <div class="container-fluid">
-    {% block content %}
+    <div class="container-fluid">
+      {% block content %}
 
-    {% endblock content %}
-  </div>
+      {% endblock content %}
+    </div>
   {% endif %}
   <footer>
-    <div class="container is-fixed-bottom is-fluid is-mobile pt-5" style="margin-top:250px;">
-      <div class="columns">
-        <div class="column is-12 has-background-danger has-text-centered">
-          <h4 class="text is-2 is-center" style="font-weight: bold; color: white;"> Copyright | 2021 @ Design &
-            Developed By <span style="color: yellow;">NIBMG --
-              Employees</span> </h4>
+    <div class="footer">
+      <div class=" is-sticky-bottom is-fluid is-mobile pt-5">
+        <div class="columns">
+          <div class="column is-12 has-background-danger has-text-centered">
+            <h4 class="text is-2 is-center" style="font-weight: bold; color: white;"> Copyright | 2021 @ Design &
+              Developed By <span style="color: yellow;">NIBMG --
+                Employees</span> </h4>
+          </div>
         </div>
       </div>
     </div>
