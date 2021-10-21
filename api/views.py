@@ -246,8 +246,9 @@ class CustomerRegView(View):
                         messages.error(request, "Invalid username or password.")
                 else:
                     messages.error(request, "Invalid username or password.")
-                form = LoginForm()
-                return render(request, 'login_regis.html', {'login_form': form})
+                form1 = LoginForm()
+                form2 = NewUserForm()
+                return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
 
 
 class HomeView(View):
