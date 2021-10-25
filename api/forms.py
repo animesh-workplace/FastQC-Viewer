@@ -7,33 +7,25 @@ from django.contrib.auth import password_validation
 
 
 class NewUserForm(UserCreationForm):
-    password1 = forms.CharField(
-        label='Password',
-        widget=forms.PasswordInput(attrs={'class': 'input', 'type': 'password', 'id': 'passl', 'data-type': 'password',
-                                          'placeholder': 'Enter Password'}))
-    password2 = forms.CharField(
-        label='Confirm Password',
-        widget=forms.PasswordInput(attrs={'class': 'input', 'type': 'password', 'id': 'passl', 'data-type': 'password',
-                                          'placeholder': 'Enter Confirm Password'}))
+    password1 = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(
+            attrs={'class': 'input', 'type': 'password', 'id': 'passr1', 'placeholder': 'Enter Password'}))
+    password2 = forms.CharField(label=_("Confirm Password"), strip=False, widget=forms.PasswordInput(
+            attrs={'class': 'input', 'type': 'password', 'id': 'passr2', 'placeholder': 'Enter Confirm Password'}))
 
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
         widgets = {
             'username': forms.TextInput(
-                attrs={'class': 'input', 'type': 'text', 'id': 'userl', 'placeholder': 'Enter UserName'})}
+                attrs={'class': 'input', 'type': 'text', 'id': 'userr1', 'placeholder': 'Enter UserName'})}
 
-
-# 		if commit:
-# 			user.save()
-# 		return user
 
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(
-        attrs={'autofocus': True, 'class': 'input', 'id': 'userl', 'type': 'text',
+        attrs={'autofocus': True, 'class': 'input', 'id': 'userl1', 'type': 'text',
                'placeholder': 'Enter UserName'}))
     password = forms.CharField(label=_("Password"), strip=False, widget=forms.PasswordInput(
-        attrs={'autocomplete': 'current-password', 'class': 'input', 'data-type': 'password', 'id': 'passl',
+        attrs={'autocomplete': 'current-password', 'class': 'input', 'type': 'password', 'id': 'passl1',
                'placeholder': 'Enter Your Password'}))
 
 

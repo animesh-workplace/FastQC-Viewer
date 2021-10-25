@@ -16,19 +16,19 @@
 									{% csrf_token %}
 								<div class="group">
 									<label class="label">Username</label>
-<!--									<input id="userl" type="text" class="input">-->
 									{{login_form.username}}
 								</div>
 								<div class="group">
-									<label class="label">Password</label>
+									<label  class="label">Password</label>
 									{{login_form.password}}
+									<i class="fas fa-eye has-icons-right" id="togglePassword" onclick="myFunction(e)"></i>
 								</div>
 								<div class="group">
 									<input id="check" type="checkbox" class="check" checked>
 									<label for="check"><span class="icon"></span> Keep me Signed in</label>
 								</div>
 								<div class="group">
-									<input type="submit" class="button" name="signin" value="SignIn">
+									<input type="submit" class="button" name="signin" value="Sign In">
 								</div>
 								<div class="hr"></div>
 								<div class="foot-lnk">
@@ -47,10 +47,12 @@
 									<div class="group">
 										<label class="label">Password</label>
 										{{register_form.password1}}
+										<i class="fas fa-eye has-icons-right" id="togglePassword1" onclick="myPass()"></i>
 									</div>
 									<div class="group">
 										<label class="label">Repeat Password</label>
 										{{register_form.password2}}
+										<i class="fas fa-eye has-icons-right" id="togglePassword2" onclick="myConpass()"></i>
 									</div>
 									<div class="group">
 										<input type="submit" class="button" name="signup" value="Sign Up">

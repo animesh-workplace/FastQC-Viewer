@@ -4,7 +4,7 @@ $(document).ready(function () {
     var table = $('#tables').DataTable({
         orderCellsTop: true,
         responsive: true,
-        fixedHeader: true,
+        fixedHeader: false,
         initComplete: function () {
             var api = this.api();
  

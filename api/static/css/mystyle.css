@@ -23,7 +23,9 @@ justify-content:center;
 	text-decoration: none;
 	font-family: 'Poppins', sans-serif;
 }
-
+.group{
+    position:relative;
+}
 .login-wrap{
 	width:100%;
 	margin:auto;
@@ -102,12 +104,40 @@ justify-content:center;
     color:black;
     border-radius:25px;
 }
-#userl{
+#userl1{
     border:none;
 	padding:8px 8px;
 	border-radius:30px;
 	background:white;
 	text-align:center
+}
+#passl1{
+    border:none;
+	padding:10px 8px;
+	border-radius:30px;
+	background:white;
+	text-align:center;
+}
+#userr1{
+    border:none;
+	padding:10px 8px;
+	border-radius:30px;
+	background:white;
+	text-align:center;
+}
+#passr1{
+    border:none;
+	padding:10px 8px;
+	border-radius:30px;
+	background:white;
+	text-align:center;
+}
+#passr2{
+    border:none;
+	padding:10px 8px;
+	border-radius:30px;
+	background:white;
+	text-align:center;
 }
 ::-webkit-input-placeholder {
   text-align: center;
@@ -120,21 +150,7 @@ justify-content:center;
   color:blue;
   font-weight: 600;
 }
-#passl{
-    border:none;
-	padding:10px 8px;
-	border-radius:30px;
-	background:white;
-	text-align:center;
-}
-#search_box{
-	border:2px black;
-	padding-left:5px;
-	margin-left:-5px;
-	border-radius:30px;
-	background:rgb(255, 255, 255);
-	text-align: center;
-}
+
 #editform{
      border:2px;
      padding:10px 8px;
@@ -203,6 +219,21 @@ justify-content:center;
 }
 .login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
 	transform:rotate(0);
+}
+#togglePassword{
+   position:absolute;
+   margin-top:-30px;
+   margin-left:90%;
+}
+#togglePassword1{
+   position:absolute;
+   margin-top:-30px;
+   margin-left:90%;
+}
+#togglePassword2{
+   position:absolute;
+   margin-top:-30px;
+   margin-left:90%;
 }
 
 .icon-PASS{
@@ -407,11 +438,14 @@ h3 .image{
 	position:absolute;
     transform: translate(-50%, -50%);
 }
-
+.sorting{
+    padding:5px !important;
+    text-align:center;
+}
 .model {
     display: none; 
     position: fixed;
-    z-index: 8; 
+    z-index: 8;
     padding-top: 0px;
     left: 0;
     top: 0;
@@ -558,7 +592,7 @@ thead input {
 	visibility: visible;
   }
 
-  /* Tooltip for image text */
+  /* Tooltip for Table Status*/
 
   .tooltips{
 	position: relative;
@@ -566,7 +600,7 @@ thead input {
   }
   .tooltips .tooltipstatus{
 	visibility: hidden;
-	width: 150px;
+	width: 300px;
 	background-color: black;
 	color: #fff;
 	font-size:10px;
@@ -585,7 +619,7 @@ thead input {
 	content: "";
 	position: absolute;
 	top: 100%;
-	left: 50%;
+	left: 45%;
 	margin-left: -15px;
 	border-width: 5px;
 	border-style: solid;
@@ -594,8 +628,8 @@ thead input {
   }
   .tooltips:hover .tooltipstatus{
 	  visibility: visible;
-	  width: 120px;
-	  word-wrap:break-word;
+	  width: 150px;
+	  flex-wrap:wrap;
   }
 
   /* Table Heading Tooltips */
@@ -619,9 +653,13 @@ thead input {
 .click-zoom input[type=checkbox]:checked~img {
   transform: scale(2);
   cursor: zoom-out
+  align-items:center;
 }
 .center{
     margin-left: auto;
     margin-right: auto;
     margin-top:15%;
+}
+#search_box{
+ background-color:red;
 }

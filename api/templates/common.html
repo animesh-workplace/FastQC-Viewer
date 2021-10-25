@@ -20,12 +20,13 @@
 
 
   <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-  <script language="javascript" src="{% static 'js/my.js' %}"></script>
+
   <script language="javascript" src="{% static 'js/jquery-3.5.1.js' %}"></script>
   <script language="javascript" src="{% static 'js/filter.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.js' %}"></script>
   <script language="javascript" src="{% static 'js/jquery.dataTables.min.js' %}"></script>
   <script language="javascript" src="{% static 'js/main.min.js' %}"></script>
+  <script language="javascript" src="{% static 'js/my.js' %}"></script>
 <!--  <script language="javascript" src="{% static 'js/lightbox.js' %}"></script>-->
   {% if messages %}
    <script>
@@ -161,7 +162,11 @@
 
   <script>
     const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#myInput');
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const togglePassword2 = document.querySelector('#togglePassword2');
+    const password = document.querySelector('#passl1');
+    const password1 = document.querySelector('#passr1');
+    const password2 = document.querySelector('#passr2');
 
     togglePassword.addEventListener('click', function (e) {
       // toggle the type attribute
@@ -170,24 +175,24 @@
       // toggle the eye slash icon
       this.classList.toggle('fa-eye-slash');
     });
+    togglePassword1.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+      password1.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+    });
+    togglePassword2.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+      password2.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+    });
   </script>
-  <script>
-    var cl = document.getElementByClass('close');
-  </script>
-  <script language="javascript" src="{% static 'js/modal.js' %}"></script>
-  <script>
-    const startDate = document.getElementById("dateFrom");
-    const endDate = document.getElementById("dateTo");
-    function filterDateArray() {
-      const dates = ['2021-10-23', '2021-10-24', '2021-10-25', '2021-10-26', '2021-10-27', '2021-10-28', '2021-10-29', '2021-10,30'];
-      filteredDate = dates.filter(dataFilter);
-      function dataFilter(date) {
-        return date >= startDate.value && date <= endDate.value;
-      }
-      console.log(filteredDate);
-    }
 
-  </script>
+  <script language="javascript" src="{% static 'js/modal.js' %}"></script>
+
 
 </body>
 

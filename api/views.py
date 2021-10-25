@@ -263,7 +263,7 @@ class HomeView(View):
             newptd = patient.values('Sequence').distinct()  # Sequence Send
             prodata = Data1.objects.values('Project').distinct()
             return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
-                                                    'sqt': ptd_dat, 'smp': newptd})
+                                                    'sqt': ptd_dat, 'smp': newptd, 'sqc': pt})
 
 
 @csrf_exempt
