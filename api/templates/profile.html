@@ -23,17 +23,17 @@
       <div class="row">
           <div class="columns">
               <div class="column table-container">
+              <h4 href="#" style="font-size:15px; font-weight:bold; margin-left:20px; color:blue;"> {{sqc}} / </h4>
                      <!--      Table Print        -->
-              <table class="table ">
+              <table class="table">
                   <thead>
                     <tr style="text-align:center">
                         {% if smp %}
                         <th>ID</th>
                         <th>Patient</th>
-<!--                        {% for j in smp %}-->
-<!--                            <th colspan = "2" ></th>-->
-<!--                        {% endfor%}-->
-                        <th colspan="6">Sequence</th>
+                        <th colspan="2">DNA</th>
+                        <th colspan="2">RNA</th>
+                        <th colspan="2">FFPE</th>
                         {% endif %}
                     </tr>
                   </thead>
@@ -44,42 +44,40 @@
                            <th>{{ptd.Patient}}</th>
                            {% for s in sqt %}
                                 {% if ptd.Patient == s.Patient%}
-                                    {% if s.Sequence == 'DNA' %}
-                                       <td style="font-size:15px; font-weight:bold; display:flex-inline;">
-                                           {{s.Sequence}}
+                                    {% if s.Sequence == 'DNA'  %}
+                                        <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+
                                            {% if s.Sample == '131' %}
-                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                            <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
                                            {%elif s.Sample == '111' %}
-                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                           {%elif s.Sample == None %}
-                                            <a href="#">NA</a>
+                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+
                                            {% endif %}
+
                                        </td>
-                                    {%elif s.Sequence == 'FFPE' %}
+                                    {% endif %}
+                                    {% if s.Sequence == 'RNA' %}
                                         <td style="font-size:15px; font-weight:bold; display:flex-inline;">
                                            {{s.Sequence}}
                                            {% if s.Sample == '131' %}
                                             <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
                                            {%elif s.Sample == '111' %}
-                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                           {%elif s.Sample == None %}
-                                            <a href="#">NA</a>
+                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+
                                            {% endif %}
                                        </td>
-                                    {%elif s.Sequence == 'RNA' %}
+                                    {% endif %}
+                                    {% if s.Sequence == 'FFPE' %}
                                         <td style="font-size:15px; font-weight:bold; display:flex-inline;">
                                            {{s.Sequence}}
                                            {% if s.Sample == '131' %}
                                             <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
                                            {%elif s.Sample == '111' %}
-                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                           {%elif s.Sample == None %}
-                                            <a href="#">NA</a>
+                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+
                                            {% endif %}
                                        </td>
-                                    {% else %}
-                                        <td style="font-size:15px; font-weight:bold; display:flex-inline;">NA</td>
-                                    {%endif%}
+                                    {% endif %}
                                 {% endif %}
                            {% endfor %}
                        </tr>
@@ -90,40 +88,42 @@
           </div>
       </div>
   </div>
-{% elif sample %}
+{%endif%}
+{% if sample %}
     <div class="container">
         <div class="row">
             <div class="columns">
                 <div class="column table-container">
-                    <h3>{{sqc}} / {{spp}}</h3>
-                    <table class="table" id="tables" style="text-align:center; font-size:15px;">
+                    <a style="font-size:15px; font-weight:bold; margin-left:20px; margin-top:20px;" href="{% url 'projectdetail' pro %}">{{pro}}</a> /
+                    <a style="font-size:15px; font-weight:bold;" href="{% url 'projectdetail' pro %}">{{sqc}}</a> /
+                    <a style="font-size:15xp; font-weight:bold;" href="{% url 'projectdetail' pro %}">{{spp}}</a>
+                    <table class="table is-fullwidth is-responsive" id="tables" style="text-align:center; font-size:15px;">
                         <thead>
-                        <tr class="filters">
-                            <th style="font-weight:bold;">ID</th>
-                            <th style="font-weight:bold">BS</th>
-                            <th>PBSQ</th>
-                            <th>PTSQ</th>
-                            <th>PSQS</th>
-                            <th>PBSC</th>
-                            <th>PSGC</th>
-                            <th>PBNC</th>
-                            <th>SLD</th>
-                            <th>SDL</th>
-                            <th>OS</th>
-                            <th>AC</th>
-                            <th>Total Sequence</th>
-                            <th>Sequence Length</th>
-                            <th>%GC</th>
-                            <th>Lane</th>
-                            <th>Row</th>
-                            <th>Action</th>
-                            <th>Action</th>
-                        </tr>
+                            <tr class="filters">
+                                <th style="font-weight:bold;">ID</th>
+                                <th>BS</th>
+                                <th>PBSQ</th>
+                                <th>PTSQ</th>
+                                <th>PSQS</th>
+                                <th>PBSC</th>
+                                <th>PSGC</th>
+                                <th>PBNC</th>
+                                <th>SLD</th>
+                                <th>SDL</th>
+                                <th>OS</th>
+                                <th>AC</th>
+                                <th>TS</th>
+                                <th>SL</th>
+                                <th>%GC</th>
+                                <th>Lane</th>
+                                <th>Row</th>
+                                <td style="font-size:15px; font-weight:bold; text-align:center;">Action</td>
+                            </tr>
                         </thead>
                         <tbody class="table-body">
                         {% for sp in sample%}
                             <tr>
-                                <td>{{sp.id}}</td>
+                                <td>{{forloop.counter}}</td>
                                 <td> <span class="status-{{sp.BS}} tooltips"><p>{{sp.BS}}</p>
                                     <span class="tooltipstatus">Basic Statistics</span></span></td>
                                 <td> <span  class="status-{{sp.PBSQ}} tooltips"><p>{{sp.PBSQ}}</p>
@@ -151,14 +151,11 @@
                                 <td>{{sp.GC}}</td>
                                 <td>{{sp.Lane}}</td>
                                 <td>{{sp.Row}}</td>
-                                <td>
+                                <td class="navbar-start">
                                     <a type="button" class="button is-small is-danger" href="{% url 'deleted' sp.id %}">Delete</a>
-                                </td>
-                                <td class="is-actions-cell ">
-                                      <div class="buttons ">
                                         <!----Modal Button ---->
 
-                                        <button class="button is-small is-info modal-button" data-target="#myModal{{forloop.counter}}">Show</button>
+                                    <button class="button is-small is-info modal-button" style="margin-left:10px;" data-target="#myModal{{forloop.counter}}">Show</button>
 
                                         <!---- Modal Code  ---->
                                         <div id="myModal{{forloop.counter}}" class="model">
@@ -323,7 +320,7 @@
 
                                         </div>
                                         <!---- Modal Close --->
-                                      </div>
+
                                 </td>
                             </tr>
                         {% endfor%}
