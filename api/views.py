@@ -209,7 +209,8 @@ def data_store(request):
 
     except:
         messages.error(request, "Data Not Uploaded Successfully !!!")
-        return redirect(request, "profile.html")
+        response = redirect('/profile/')
+        return response
 
 
 class CustomerRegView(View):
