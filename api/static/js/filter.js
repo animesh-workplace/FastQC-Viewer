@@ -1,13 +1,11 @@
-
-
 $(document).ready(function () {
     var table = $('#tables').DataTable({
-        orderCellsTop: true,
+        orderCellsTop: false,
         responsive: true,
-        fixedHeader: false,
+        fixedHeader: true,
         initComplete: function () {
             var api = this.api();
- 
+
             // For each column
             api
                 .columns()
@@ -18,8 +16,8 @@ $(document).ready(function () {
                         $(api.column(colIdx).header()).index()
                     );
                     var title = $(cell).text();
-                    $(cell).html('<input type="text" id="search_box" placeholder= '+ title +' />');
- 
+                    $(cell).html('<input type="text" id="search_box" placeholder=" '+ title +'" />');
+
                     // On every keypress in this input placeholder="Search Here" + title +
                     $(
                         'input',
@@ -28,11 +26,11 @@ $(document).ready(function () {
                         .off('keyup change')
                         .on('keyup change', function (e) {
                             e.stopPropagation();
- 
+
                             // Get the search value
                             $(this).attr('title', $(this).val());
                             var regexr = '({search})'; //$(this).parents('th').find('select').val();
- 
+
                             var cursorPosition = this.selectionStart;
                             // Search the column for that value
                             api
@@ -45,7 +43,7 @@ $(document).ready(function () {
                                     this.value == ''
                                 )
                                 .draw();
- 
+
                             $(this)
                                 .focus()[0]
                                 .setSelectionRange(cursorPosition, cursorPosition);
