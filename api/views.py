@@ -262,6 +262,7 @@ class HomeView(View):
             ptd_dat = patient.values('Project', 'Patient', 'Sequence', 'Samplename', 'Sample').distinct()
             newptd = patient.values('Sequence').distinct()  # Sequence Send
             prodata = Data1.objects.values('Project').distinct()
+
             return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
                                                     'sqt': ptd_dat, 'smp': newptd, 'sqc': pt})
 
@@ -283,4 +284,5 @@ def delete(request, id):
     if request.method == 'GET':
         dl = Data2.objects.get(pk=id)
         dl.delete()
+        messages.success(request, "Data Deleted Successfully !!!!!!!")
         return HttpResponseRedirect('/')

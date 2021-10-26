@@ -18,7 +18,7 @@ $(document).ready(function () {
                         $(api.column(colIdx).header()).index()
                     );
                     var title = $(cell).text();
-                    $(cell).html('<input type="text" id="search_box" placeholder= "Search" />');
+                    $(cell).html('<input type="text" id="search_box" placeholder= '+ title +' />');
  
                     // On every keypress in this input placeholder="Search Here" + title +
                     $(

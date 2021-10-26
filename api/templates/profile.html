@@ -28,13 +28,13 @@
               <table class="table">
                   <thead>
                     <tr style="text-align:center">
-                        {% if smp %}
+
                         <th>ID</th>
                         <th>Patient</th>
-                        <th colspan="2">DNA</th>
-                        <th colspan="2">RNA</th>
-                        <th colspan="2">FFPE</th>
-                        {% endif %}
+                        <th >DNA</th>
+                        <th >RNA</th>
+                        <th >FFPE</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -42,44 +42,48 @@
                        <tr class="" style="text-align:center">
                            <th>{{forloop.counter}}</th>
                            <th>{{ptd.Patient}}</th>
+                           <td style="font-size:15px; font-weight:bold; display:flex-inline;">
                            {% for s in sqt %}
                                 {% if ptd.Patient == s.Patient%}
-                                    {% if s.Sequence == 'DNA'  %}
-                                        <td style="font-size:15px; font-weight:bold; display:flex-inline;">
-
-                                           {% if s.Sample == '131' %}
+                                <!--             DNA Data Show              -->
+                                    {% if s.Sequence == 'DNA' %}
+                                           {% if s.Sample == '111' and s.Sample != '131' %}
+                                            <a class="tag is-link is-danger"  href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                           {% elif s.Sample == '131' and s.Sample != '111' %}
                                             <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
-                                           {%elif s.Sample == '111' %}
-                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-
                                            {% endif %}
-
-                                       </td>
-                                    {% endif %}
-                                    {% if s.Sequence == 'RNA' %}
-                                        <td style="font-size:15px; font-weight:bold; display:flex-inline;">
-                                           {{s.Sequence}}
-                                           {% if s.Sample == '131' %}
-                                            <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
-                                           {%elif s.Sample == '111' %}
-                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-
-                                           {% endif %}
-                                       </td>
-                                    {% endif %}
-                                    {% if s.Sequence == 'FFPE' %}
-                                        <td style="font-size:15px; font-weight:bold; display:flex-inline;">
-                                           {{s.Sequence}}
-                                           {% if s.Sample == '131' %}
-                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
-                                           {%elif s.Sample == '111' %}
-                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-
-                                           {% endif %}
-                                       </td>
                                     {% endif %}
                                 {% endif %}
                            {% endfor %}
+                           </td>
+                           <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+                                <!--            RNA Data Show               -->
+                           {% for s in sqt %}
+                                {% if ptd.Patient == s.Patient%}
+                                    {% if s.Sequence == 'RNA' %}
+                                        {% if s.Sample == '131' %}
+                                            <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                        {% elif s.Sample == '111' %}
+                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                           {% endfor %}
+                           </td>
+                           <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+                                <!--               FFPE Data Show                 -->
+                           {% for s in sqt %}
+                                {% if ptd.Patient == s.Patient%}
+                                    {% if s.Sequence == 'FFPE' %}
+                                        {% if s.Sample == '131' %}
+                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                        {% elif s.Sample == '111' %}
+                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                           {% endfor %}
+                           </td>
                        </tr>
                   {% endfor %}
                   </tbody>
@@ -100,23 +104,23 @@
                     <table class="table is-fullwidth is-responsive" id="tables" style="text-align:center; font-size:15px;">
                         <thead>
                             <tr class="filters">
-                                <th style="font-weight:bold;">ID</th>
+                                <th style="font-weight:bold; width:5%;">ID</th>
                                 <th>BS</th>
-                                <th>PBSQ</th>
-                                <th>PTSQ</th>
-                                <th>PSQS</th>
-                                <th>PBSC</th>
-                                <th>PSGC</th>
-                                <th>PBNC</th>
-                                <th>SLD</th>
-                                <th>SDL</th>
+                                <th style="width:6%">PBSQ</th>
+                                <th style="width:6%">PTSQ</th>
+                                <th style="width:6%">PSQS</th>
+                                <th style="width:6%">PBSC</th>
+                                <th style="width:6%">PSGC</th>
+                                <th style="width:6%">PBNC</th>
+                                <th style="width:5%">SLD</th>
+                                <th style="width:5%">SDL</th>
                                 <th>OS</th>
                                 <th>AC</th>
                                 <th>TS</th>
                                 <th>SL</th>
-                                <th>%GC</th>
-                                <th>Lane</th>
-                                <th>Row</th>
+                                <th style="width:5%;">%GC</th>
+                                <th style="width:5%;">Lane</th>
+                                <th style="width:5%;">Row</th>
                                 <td style="font-size:15px; font-weight:bold; text-align:center;">Action</td>
                             </tr>
                         </thead>
@@ -155,7 +159,7 @@
                                     <a type="button" class="button is-small is-danger" href="{% url 'deleted' sp.id %}">Delete</a>
                                         <!----Modal Button ---->
 
-                                    <button class="button is-small is-info modal-button" style="margin-left:10px;" data-target="#myModal{{forloop.counter}}">Show</button>
+                                    <button class="button is-small is-info modal-button ml-auto" data-target="#myModal{{forloop.counter}}">Show</button>
 
                                         <!---- Modal Code  ---->
                                         <div id="myModal{{forloop.counter}}" class="model">
@@ -165,13 +169,13 @@
                                                     <!---  Modal Start Header ---->
                                                     <div class="modal-header">
                                                       <button type="button" class="close is-small" data-dismiss="modal">&times;</button>
-                                                      <h2>Modal Header</h2>
+                                                        <h1 style="margin-bottom: 20px;">All Image of {{sp.Path_name}}</h1>
                                                     </div>
                                                     <!---  Modal End Header ---->
                                                     <!---  Modal Start Body ---->
                                                     <div class="modal-body">
                                                       <div class="tabs-wrapper">
-                                                        <h1 style="margin-bottom: 20px;">All Image of {{sp.Path_name}}</h1>
+
                                                           <div class="tabs-content">
                                                               <div class="gallery">
                                                                 <!-- Image gallery -->
@@ -202,7 +206,7 @@
                                                                     <h3><span class="image {{sp.PBSQ}}"></span><span class="tooltiptext">Per base sequence quality</span></h3>
                                                                     <div class="click-zoom">
                                                                       <label>
-                                                                        <input type="checkbox">
+                                                                        <input type="checkbox" class="example">
                                                                         <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/per_base_quality.png">
                                                                       </label>
                                                                     </div>
@@ -211,7 +215,7 @@
                                                                     <h3><span class="image {{sp.PTSQ}}"></span><span class="tooltiptext">Per tile sequence quality</span></h3>
                                                                     <div class="click-zoom">
                                                                       <label>
-                                                                        <input type="checkbox">
+                                                                        <input type="checkbox" class="example">
                                                                         <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/per_tile_quality.png">
                                                                       </label>
                                                                     </div>
@@ -224,7 +228,7 @@
                                                                     <h3><span class="image {{sp.PSQS}}"></span><span class="tooltiptext">Per sequence quality scores</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                               <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/per_sequence_quality.png">
                                                                           </label>
                                                                       </div>
@@ -234,7 +238,7 @@
                                                                     <h3><span class="image {{sp.PBSC}}"></span><span class="tooltiptext">Per base sequence content</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                               <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/per_base_sequence_content.png">
                                                                           </label>
                                                                       </div>
@@ -243,7 +247,7 @@
                                                                     <h3><span class="image {{sp.PSGC}}"></span><span class="tooltiptext">Per sequence GC content</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                               <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/per_sequence_gc_content.png">
                                                                           </label>
                                                                       </div>
@@ -255,7 +259,7 @@
                                                                     <h3><span class="image {{sp.PBNC}}"></span><span class="tooltiptext">Per base N content</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                               <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/per_base_n_content.png">
                                                                           </label>
                                                                       </div>
@@ -264,7 +268,7 @@
                                                                     <h3><span class="image {{sp.SLD}}"></span><span class="tooltiptext">Sequence Length Distribution</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                                <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/sequence_length_distribution.png">
                                                                           </label>
                                                                       </div>
@@ -273,7 +277,7 @@
                                                                     <h3><span class="image {{sp.SDL}}"></span><span class="tooltiptext">Sequence Duplication Levels</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                               <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/duplication_levels.png">
                                                                           </label>
                                                                       </div>
@@ -284,13 +288,21 @@
 
                                                                   <div class="column tooltip">
                                                                     <h3><span class="image {{sp.OS}}"></span><span class="tooltiptext">Overrepresented sequences</span></h3>
-                                                                      <div class="click-zoom">
-                                                                          <label>
-                                                                              <input type="checkbox">
-                                                                              <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/overrepresented_sequences.png">
-                                                                          </label>
-                                                                      </div>
+                                                                      {% if sp.OS == 'PASS'%}
+                                                                          <div class="click-zoom">
+                                                                              <h1 style="text-align:center">Not Overreperensted Sequences</h1>
+                                                                          </div>
+                                                                      {% elif sp.OS == 'WARN' and sp.OS == 'FAIL' %}
+                                                                          <div class="click-zoom">
+                                                                              <h1 style="text-align:center">Overreperensted Sequences</h1>
+                                                                              <label>
+                                                                                  <input type="checkbox" class="example">
+                                                                                  <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/overrepresented_sequences.png">
+                                                                              </label>
+                                                                          </div>
+                                                                      {% endif %}
                                                                   </div>
+
                                                                   <div class="column">
 
                                                                   </div>
@@ -298,7 +310,7 @@
                                                                     <h3><span class="image {{sp.AC}}"></span><span class="tooltiptext">Adapter Content</span></h3>
                                                                       <div class="click-zoom">
                                                                           <label>
-                                                                              <input type="checkbox">
+                                                                              <input type="checkbox" class="example">
                                                                               <img src="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/{{sp.Path_name}}/Images/adapter_content.png">
                                                                           </label>
                                                                       </div>
@@ -313,7 +325,7 @@
 
                                                     <!---  Modal Footer ---->
                                                     <div class="modal-footer">
-                                                      <h3>Modal Footer</h3>
+
                                                     </div>
 
                                               </div>
