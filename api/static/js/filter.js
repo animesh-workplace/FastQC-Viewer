@@ -3,6 +3,17 @@ $(document).ready(function () {
         orderCellsTop: false,
         responsive: true,
         fixedHeader: true,
+        paging: true,
+        columnDefs: [{
+            "targets":[17],
+            "orderable": false
+        },
+        {
+            "targets":[17],
+            "visible": true,
+            "searchable": false
+        }],
+
         initComplete: function () {
             var api = this.api();
 

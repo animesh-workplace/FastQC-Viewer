@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Task 1</title>
+  <title>FastQC Project</title>
   <base href="/">
   <link rel="stylesheet" type="text/css" href="{% static 'css/bulma.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}">
@@ -104,8 +104,8 @@ $(document).ready(function(){
 
 <body>
 
+
   {% if request.user.is_authenticated %}
-  
   <nav class="navbar is-fixed-top box-shadow-y">
     <div class="navbar-brand toggler">
       <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'home' %}">
@@ -132,7 +132,7 @@ $(document).ready(function(){
             <strong>{{user}}</strong>
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="#">Profile</a>
+            <a class="navbar-item" href="{% url 'home' %}">Profile</a>
             <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
           </div>
         </div>

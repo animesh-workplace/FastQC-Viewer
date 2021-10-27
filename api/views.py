@@ -5,10 +5,9 @@ from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from api.forms import LoginForm, NewUserForm, EditForm, FilterForm
+from api.forms import LoginForm, NewUserForm
 from backend.settings import BASE_DIR, MEDIA_URL
 from .models import Data1, Data2
-from zipfile import ZipFile
 import os
 import glob
 from django.views.decorators.csrf import csrf_exempt
@@ -19,6 +18,70 @@ from django.views.decorators.csrf import csrf_exempt
 def data_store(request):
     try:
         # First Table Data Uploaded
+        if request.user.is_authenticated:
+            path_file = os.path.join(BASE_DIR / 'media/Project')
+            dirfiles = os.listdir(path_file)
+            fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
+            dirs = []
+            for file in fullpaths:
+                if os.path.isdir(file): dirs.append(file)
+                os.getcwd()
+            x = list(dirs)
+            for i in x:
+                project_path = os.listdir(i)
+                folder_project = map(lambda name: os.path.join(i, name), project_path)
+                fll = []
+                for profolder in folder_project:
+                    if os.path.isdir(profolder): fll.append(profolder)
+                    os.getcwd()
+                y1 = list(fll)
+                path_list_all = []
+                for j in y1:
+                    prounder_path = os.listdir(j)
+                    pro_folder = map(lambda name: os.path.join(j, name), prounder_path)
+                    path = []
+                    for f in pro_folder:
+                        if os.path.isdir(f): path.append(f)
+                        os.getcwd()
+                    y2 = list(path)
+                    for k in y2:
+                        path_list_all.append(k)
+                y3 = list(path_list_all)
+                fastqc_path = []
+                for k in y3:
+                    fqc_path = os.listdir(k)
+                    fqc_fol = map(lambda name: os.path.join(k, name), fqc_path)
+                    path1 = []
+                    for k1 in fqc_fol:
+                        if os.path.isdir(k1): path1.append(k1)
+                        os.getcwd()
+                    for s in path1:
+                        fastqc_path.append(s)
+                y4 = list(fastqc_path)
+                for l in y4:
+                    fast_qc = os.listdir(l)
+                    fast_fol = map(lambda name: os.path.join(l, name), fast_qc)
+                    path2 = []
+                    for l1 in fast_fol:
+                        if os.path.isdir(l1): path2.append(l1.split('/'))
+                        os.getcwd()
+                    for s1 in path2:
+                        main_path = s1.index('media')
+                        new_path = s1[main_path:]
+                        project = new_path[2]
+                        patient = new_path[3]
+                        sequence = new_path[4]
+                        fastqcfol = new_path[5]
+                        samplename = new_path[6]
+                        sample = new_path[6][4:]
+                        if Data1.objects.filter(
+                                Q(Patient=patient) & Q(Sequence=sequence) & Q(Samplename=samplename)).exists():
+                            pass
+                        else:
+                            insert = Data1(Project=project, Patient=patient, Sequence=sequence, Fastqcfol=fastqcfol,
+                                           Samplename=samplename, Sample=sample)
+                            insert.save()
+        # Second Table Data Uploaded
         if request.user.is_authenticated:
             path_file = os.path.join(BASE_DIR / 'media/Project')
             dirfiles = os.listdir(path_file)
@@ -79,6 +142,7 @@ def data_store(request):
                         os.getcwd()
                 y6 = list(sample_path)
                 for o in y6:
+                    print(o)
                     os.chdir(o)
                     text_file = glob.glob('*.txt')
                     image_path = o.split('/')
@@ -139,76 +203,12 @@ def data_store(request):
                                    PTSQ=ptsq, PSQS=psqs, PBSC=pbsc, PSGC=psgc, PBNC=pbnc, SLD=sld, SDL=sdl, OS=oss,
                                    AC=ac, Total_Sequence=tsqc, Sequence_length=sqclth, GC=gc)
                         st.save()
-        # Second Table Data Uploaded
-        if request.user.is_authenticated:
-                path_file = os.path.join(BASE_DIR / 'media/Project')
-                dirfiles = os.listdir(path_file)
-                fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
-                dirs = []
-                for file in fullpaths:
-                    if os.path.isdir(file): dirs.append(file)
-                    os.getcwd()
-                x = list(dirs)
-                for i in x:
-                    project_path = os.listdir(i)
-                    folder_project = map(lambda name: os.path.join(i, name), project_path)
-                    fll = []
-                    for profolder in folder_project:
-                        if os.path.isdir(profolder): fll.append(profolder)
-                        os.getcwd()
-                    y1 = list(fll)
-                    path_list_all = []
-                    for j in y1:
-                        prounder_path = os.listdir(j)
-                        pro_folder = map(lambda name: os.path.join(j, name), prounder_path)
-                        path = []
-                        for f in pro_folder:
-                            if os.path.isdir(f): path.append(f)
-                            os.getcwd()
-                        y2 = list(path)
-                        for k in y2:
-                            path_list_all.append(k)
-                    y3 = list(path_list_all)
-                    fastqc_path = []
-                    for k in y3:
-                        fqc_path = os.listdir(k)
-                        fqc_fol = map(lambda name: os.path.join(k, name), fqc_path)
-                        path1 = []
-                        for k1 in fqc_fol:
-                            if os.path.isdir(k1): path1.append(k1)
-                            os.getcwd()
-                        for s in path1:
-                            fastqc_path.append(s)
-                    y4 = list(fastqc_path)
-                    for l in y4:
-                        fast_qc = os.listdir(l)
-                        fast_fol = map(lambda name: os.path.join(l, name), fast_qc)
-                        path2 = []
-                        for l1 in fast_fol:
-                            if os.path.isdir(l1): path2.append(l1.split('/'))
-                            os.getcwd()
-                        for s1 in path2:
-                            main_path = s1.index('media')
-                            new_path = s1[main_path:]
-                            project = new_path[2]
-                            patient = new_path[3]
-                            sequence = new_path[4]
-                            fastqcfol = new_path[5]
-                            samplename = new_path[6]
-                            sample = new_path[6][4:]
-                            if Data1.objects.filter(
-                                    Q(Patient=patient) & Q(Sequence=sequence) & Q(Samplename=samplename)).exists():
-                                pass
-                            else:
-                                insert = Data1(Project=project, Patient=patient, Sequence=sequence, Fastqcfol=fastqcfol,
-                                               Samplename=samplename, Sample=sample)
-                                insert.save()
-        messages.success(request, "Data Uploaded Successfully !!")
+        messages.success(request, "Data Refresh Successfully !!")
         response = redirect('/profile/')
         return response
 
     except:
-        messages.error(request, "Data Not Uploaded Successfully !!!")
+        messages.error(request, "Sorry You are Not Authorized !!!")
         response = redirect('/profile/')
         return response
 
@@ -273,19 +273,14 @@ class HomeView(View):
 @csrf_exempt
 def show_data(request, dt=None, pt=None, data=None, data1=None):
     if dt is None and data is None and data1 is None:
-        prodata = Data1.objects.values('Project').distinct()
+        prodata = Data2.objects.values('Project').distinct()
         return render(request, {'prodata': prodata})
     if dt is not None and data is not None and data1 is not None:
         sample = Data2.objects.filter(Q(Sequence=data) & Q(Sample_name=data1))
         prodata = Data1.objects.values('Project').distinct()
-        form = EditForm()
         return render(request, 'profile.html', {'prodata': prodata, 'sample': sample, 'pro': dt, 'pt': pt,
-                                                'sqc': data, 'spp': data1, 'editform': form})
+                                                'sqc': data, 'spp': data1})
 
 
-def delete(request, id):
-    if request.method == 'GET':
-        dl = Data2.objects.get(pk=id)
-        dl.delete()
-        messages.success(request, "Data Deleted Successfully !!!!!!!")
-        return HttpResponseRedirect('/')
+def handler404(request, exception):
+    return render(request, '404.html')

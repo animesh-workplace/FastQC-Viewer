@@ -11,6 +11,7 @@ SEQUENCE_CHOICE = (
     ('DNA', 'DNA'),
     ('FFPE', 'FFPE'),
     ('RNA', 'RNA'),
+    ('Null', 'Null'),
 )
 
 
