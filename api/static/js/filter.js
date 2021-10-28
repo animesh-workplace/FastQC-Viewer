@@ -1,6 +1,6 @@
 $(document).ready(function () {
     var table = $('#tables').DataTable({
-        orderCellsTop: false,
+        orderCellsTop: true,
         responsive: true,
         fixedHeader: true,
         paging: true,

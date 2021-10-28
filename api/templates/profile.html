@@ -5,10 +5,10 @@
       <div class="row">
           <div class="columns">
               <div class="column">
-                  <div class="card">
+                  <div class="card hero is-medium is-link">
                       <div class="navbar-start">
                           {% for i in prodata %}
-                            <a class="navbar-item has-text-weight-bold has-text-black is-link"
+                            <a class="navbar-item has-text-white is-3" style="text-align:center"
                                href="{% url 'projectdetail' i.Project %}">{{i.Project}}
                             </a>
                           {% endfor %}
@@ -23,9 +23,9 @@
       <div class="row">
           <div class="columns">
               <div class="column table-container">
-              <h4 href="#" style="font-size:15px; font-weight:bold; margin-left:20px; color:blue;"> {{sqc}} / </h4>
+              <h4 href="#" style="font-size:15px; font-weight:500; margin-left:20px; color:blue;">{{sqc}}<span class="icon"><i class="fas fa-arrow-right"></i></span></h4>
                      <!--      Table Print        -->
-              <table class="table">
+              <table class="table table-responsive is-fullwidth is-mobile">
                   <thead>
                     <tr style="text-align:center">
 
@@ -42,49 +42,59 @@
                        <tr class="" style="text-align:center">
                            <th>{{forloop.counter}}</th>
                            <th>{{ptd.Patient}}</th>
-                           <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+                           <td style="font-size:15px; font-weight:300; display:flex-inline;">
                            {% for s in sqt %}
                                 {% if ptd.Patient == s.Patient%}
                                 <!--             DNA Data Show              -->
                                     {% if s.Sequence == 'DNA' %}
                                            {% if s.Sample == '131'%}
-                                            <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                            <a class="tag is-success is-3" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                            {{break}}
                                            {% elif s.Sample == '111'%}
-                                            <a class="tag is-link is-danger"  href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                           {% elif s.Samplename == 'Null' %}
-                                            <p class="tag is-black">N/A</p>
+                                            <a class="tag is-danger is-3"  href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                             {{break}}
+                                           {% else %}
+                                            <a class="normal is-3">Normal</a>
+                                            <a class="tumor is-3">Tumor</a>
                                            {%endif%}
                                     {% endif %}
                                 {% endif %}
                            {% endfor %}
                            </td>
-                           <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+                           <td style="font-size:15px; font-weight:300; display:flex-inline;">
                                 <!--            RNA Data Show               -->
                            {% for s in sqt %}
                                 {% if ptd.Patient == s.Patient%}
                                     {% if s.Sequence == 'RNA' %}
                                         {% if s.Sample == '131' %}
-                                            <a class="tag is-link is-normal" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                            <a class="tag is-success is-3" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                             {{break}}
                                         {% elif s.Sample == '111' %}
-                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                        {% elif s.Samplename == 'Null' %}
-                                            <p class="tag is-black">N/A</p>
+                                            <a class="tag is-link is-danger is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                             {{break}}
+                                        {% else %}
+                                            <a class="normal is-3">Normal</a>
+                                            <a class="tumor is-3">Tumor</a>
                                         {%endif%}
                                     {% endif %}
                                 {% endif %}
                            {% endfor %}
                            </td>
-                           <td style="font-size:15px; font-weight:bold; display:flex-inline;">
+                           <td style="font-size:15px; font-weight:300; display:flex-inline;">
                                 <!--               FFPE Data Show                 -->
                            {% for s in sqt %}
                                 {% if ptd.Patient == s.Patient%}
                                     {% if s.Sequence == 'FFPE' %}
                                         {% if s.Sample == '131' %}
-                                            <a class="tag is-link is-normal" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                            <a class="tag is-success is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                            {{break}}
                                         {% elif s.Sample == '111' %}
-                                            <a class="tag is-link is-danger" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                        {% elif s.Samplename == 'Null' %}
-                                            <p class="tag is-black">N/A</p>
+                                            <a class="tag is-link is-danger is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                             {{break}}
+
+                                        {% else %}
+                                            <a class="normal is-3">Normal</a>
+                                            <a class="tumor is-3">Tumor</a>
                                         {%endif%}
                                     {% endif %}
                                 {% endif %}
@@ -104,12 +114,12 @@
         <div class="row">
             <div class="columns">
                 <div class="column table-container">
-                    <a style="font-size:15px; font-weight:bold; margin-left:20px; margin-top:20px;" href="{% url 'projectdetail' pro %}">{{pro}}</a> /
-                    <a style="font-size:15px; font-weight:bold;" href="{% url 'projectdetail' pro %}">{{sqc}}</a> /
-                    <a style="font-size:15xp; font-weight:bold;" href="{% url 'projectdetail' pro %}">{{spp}}</a>
+                    <a style="font-size:15px;  margin-left:20px; margin-top:20px;" href="{% url 'projectdetail' pro %}"><span>{{pro}} <i class="fas fa-arrow-right"></i></span></a>
+                    <a style="font-size:15px;" href="{% url 'projectdetail' pro %}"><span>{{sqc}} <i class="fas fa-arrow-right"></i></span></a>
+                    <a style="font-size:15xp; " href="{% url 'projectdetail' pro %}"><span>{{spp}}</span></a>
 
-                    <a style="font-size:12px; font-weight:bold;" class="tag is-link is-black ml-auto" href="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/multiqc_report.html">MultiQC</a>
-                    <table class="table is-fullwidth is-responsive" id="tables" style="text-align:center; font-size:15px;">
+                    <a style="font-size:12px; font-weight:bold;" class="multiqc  ml-auto" href="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/multiqc_report.html">MultiQC</a>
+                    <table class="display responsive is-fullwidth is-desktop is-mobile" id="tables" style="text-align:center; font-size:12px;">
                         <thead>
                             <tr class="filters">
                                 <th style="font-weight:bold; width:5%;">S_No.</th>
@@ -124,7 +134,7 @@
                                 <th style="width:5%">SDL</th>
                                 <th>OS</th>
                                 <th>AC</th>
-                                <th>TS</th>
+                                <th>Total_S</th>
                                 <th>SL</th>
                                 <th style="width:5%;">%GC</th>
                                 <th style="width:5%;">Lane</th>
