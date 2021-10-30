@@ -1,15 +1,16 @@
 from django.db.models import Q, Count, Max
-from django.http import HttpResponseRedirect
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from api.forms import LoginForm, NewUserForm
-from backend.settings import BASE_DIR, MEDIA_URL
+from backend.settings import BASE_DIR, TEMPLATES
 from .models import Data1, Data2
 import os
 import glob
+
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -142,7 +143,6 @@ def data_store(request):
                         os.getcwd()
                 y6 = list(sample_path)
                 for o in y6:
-                    print(o)
                     os.chdir(o)
                     text_file = glob.glob('*.txt')
                     image_path = o.split('/')
@@ -265,8 +265,9 @@ class HomeView(View):
             ptd_dat = patient.values('Project', 'Patient', 'Sequence', 'Samplename', 'Sample').distinct()
             newptd = patient.values('Sequence').distinct()  # Sequence Send
             prodata = Data1.objects.values('Project').distinct()
+            fast = Data1.objects.values('Fastqcfol').distinct()
 
-            return render(request, 'profile.html', {'prodata': prodata, 'patient': patient,
+            return render(request, 'profile.html', {'prodata': prodata, 'patient': patient, 'fast': fast,
                                                     'sqt': ptd_dat, 'smp': newptd, 'sqc': pt})
 
 
@@ -278,8 +279,19 @@ def show_data(request, dt=None, pt=None, data=None, data1=None):
     if dt is not None and data is not None and data1 is not None:
         sample = Data2.objects.filter(Q(Sequence=data) & Q(Sample_name=data1))
         prodata = Data1.objects.values('Project').distinct()
-        return render(request, 'profile.html', {'prodata': prodata, 'sample': sample, 'pro': dt, 'pt': pt,
-                                                'sqc': data, 'spp': data1})
+        path = 'profile.html'
+        print("Profile Page Path", path)
+        return render(request, path, {'prodata': prodata, 'sample': sample, 'pro': dt, 'pt': pt,
+                                      'sqc': data, 'spp': data1})
+
+
+def multiqc(request, pro=None, ptt=None, st=None, fs=None, smmp=None):
+    if request.method == 'GET':
+        if pro is not None and ptt is not None and st is not None and fs is not None and smmp is not None:
+            # path = ('/' + pro + '/' + ptt + '/' + st + '/' + fs + '/' + smmp + '/' + 'multiqc_report.html')
+            path_name = '404.html'
+
+            return render(request, path_name)
 
 
 def handler404(request, exception):

@@ -18,12 +18,13 @@
           </div>
       </div>
   </div>
-{% if smp %}
+{% if smp and fast %}
     <div class="container">
       <div class="row">
           <div class="columns">
               <div class="column table-container">
-              <h4 href="#" style="font-size:15px; font-weight:500; margin-left:20px; color:blue;">{{sqc}}<span class="icon"><i class="fas fa-arrow-right"></i></span></h4>
+              <h4 href="#" style="font-size:15px; font-weight:500; margin-left:20px; color:blue;">
+                  {{sqc}}<span class="icon"><i class="fas fa-arrow-right"></i></span></h4>
                      <!--      Table Print        -->
               <table class="table table-responsive is-fullwidth is-mobile">
                   <thead>
@@ -115,10 +116,10 @@
             <div class="columns">
                 <div class="column table-container">
                     <a style="font-size:15px;  margin-left:20px; margin-top:20px;" href="{% url 'projectdetail' pro %}"><span>{{pro}} <i class="fas fa-arrow-right"></i></span></a>
-                    <a style="font-size:15px;" href="{% url 'projectdetail' pro %}"><span>{{sqc}} <i class="fas fa-arrow-right"></i></span></a>
+                    <a style="font-size:15px;" href="{% url 'projectdetail' pro %}"><span>{{sqc}}, {{fast}} <i class="fas fa-arrow-right"></i></span></a>
                     <a style="font-size:15xp; " href="{% url 'projectdetail' pro %}"><span>{{spp}}</span></a>
 
-                    <a style="font-size:12px; font-weight:bold;" class="multiqc  ml-auto" href="media/Project/{{pro}}/{{pt}}/{{sqc}}/FASTQC_REPORTS/{{spp}}/multiqc_report.html">MultiQC</a>
+                    <a style="font-size:12px; font-weight:bold;" class="multiqc  ml-auto" href="{%url 'multiqc' pro pt sqc 'FASTQC_REPORTS' spp %}">MultiQC</a>
                     <table class="display responsive is-fullwidth is-desktop is-mobile" id="tables" style="text-align:center; font-size:12px;">
                         <thead>
                             <tr class="filters">
