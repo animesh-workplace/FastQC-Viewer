@@ -1,6 +1,7 @@
 from django.db.models import Q, Count, Max
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
@@ -254,6 +255,7 @@ class CustomerRegView(View):
                 return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
 
 
+@method_decorator(login_required, name='dispatch')
 class HomeView(View):
     def get(self, request, pt=None):
         if pt is None:
@@ -266,7 +268,6 @@ class HomeView(View):
             newptd = patient.values('Sequence').distinct()  # Sequence Send
             prodata = Data1.objects.values('Project').distinct()
             fast = Data1.objects.values('Fastqcfol').distinct()
-
             return render(request, 'profile.html', {'prodata': prodata, 'patient': patient, 'fast': fast,
                                                     'sqt': ptd_dat, 'smp': newptd, 'sqc': pt})
 
@@ -276,23 +277,27 @@ def show_data(request, dt=None, pt=None, data=None, data1=None):
     if dt is None and data is None and data1 is None:
         prodata = Data2.objects.values('Project').distinct()
         return render(request, {'prodata': prodata})
+
     if dt is not None and data is not None and data1 is not None:
         sample = Data2.objects.filter(Q(Sequence=data) & Q(Sample_name=data1))
         prodata = Data1.objects.values('Project').distinct()
         path = 'profile.html'
-        print("Profile Page Path", path)
         return render(request, path, {'prodata': prodata, 'sample': sample, 'pro': dt, 'pt': pt,
                                       'sqc': data, 'spp': data1})
 
 
+@csrf_exempt
 def multiqc(request, pro=None, ptt=None, st=None, fs=None, smmp=None):
     if request.method == 'GET':
         if pro is not None and ptt is not None and st is not None and fs is not None and smmp is not None:
-            # path = ('/' + pro + '/' + ptt + '/' + st + '/' + fs + '/' + smmp + '/' + 'multiqc_report.html')
-            path_name = '404.html'
-
+            path_name = 'Project/' + pro + '/' + ptt + '/' + st + \
+                        '/FASTQC_REPORTS' + '/' + smmp + '/multiqc_report.html'
             return render(request, path_name)
 
 
 def handler404(request, exception):
     return render(request, '404.html')
+
+
+def handler500(request):
+    return render(request, '500.html')

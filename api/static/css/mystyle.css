@@ -705,7 +705,7 @@ thead input {
     color:white;
     cursor: not-allowed;
 }
-.multiqc{
+.multi{
     font-weight:300;
     font-size:12px;
     background-color:#ff7f50;
