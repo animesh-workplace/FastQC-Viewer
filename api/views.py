@@ -20,7 +20,7 @@ from django.views.decorators.csrf import csrf_exempt
 def data_store(request):
     try:
         # First Table Data Uploaded
-        if request.user.is_authenticated:
+        if request.user.is_superuser:
             path_file = os.path.join(BASE_DIR / 'media/Project')
             dirfiles = os.listdir(path_file)
             fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
@@ -84,7 +84,7 @@ def data_store(request):
                                            Samplename=samplename, Sample=sample)
                             insert.save()
         # Second Table Data Uploaded
-        if request.user.is_authenticated:
+        if request.user.is_superuser:
             path_file = os.path.join(BASE_DIR / 'media/Project')
             dirfiles = os.listdir(path_file)
             fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
@@ -204,12 +204,15 @@ def data_store(request):
                                    PTSQ=ptsq, PSQS=psqs, PBSC=pbsc, PSGC=psgc, PBNC=pbnc, SLD=sld, SDL=sdl, OS=oss,
                                    AC=ac, Total_Sequence=tsqc, Sequence_length=sqclth, GC=gc)
                         st.save()
-        messages.success(request, "Data Refresh Successfully !!")
-        response = redirect('/profile/')
-        return response
-
+            messages.success(request, "Data Refresh Successfully!!!")
+            response = redirect('/profile/')
+            return response
+        else:
+            messages.success(request, "Sorry You have not Permission to Refresh Data !!!")
+            response = redirect('/profile/')
+            return response
     except:
-        messages.error(request, "Sorry You are Not Authorized !!!")
+        messages.error(request, "Sorry You are Not Authorized to Refresh Data !!!")
         response = redirect('/profile/')
         return response
 
@@ -219,7 +222,7 @@ class CustomerRegView(View):
     def get(self, request):
         form1 = LoginForm()
         form2 = NewUserForm()
-        return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
+        return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
     @csrf_exempt
     def post(self, request):
@@ -228,13 +231,14 @@ class CustomerRegView(View):
                 form = NewUserForm(request.POST)
                 if form.is_valid():
                     user = form.save()
-                    messages.success(request, "Registration successful. !!!!1")
-                    return redirect('login')
+                    user = user
+                    messages.success(request, "Registration successfully .!!!!")
+                    return redirect('login', )
                 else:
                     messages.error(request, "Unsuccessful registration. Invalid information.")
                     form1 = LoginForm()
                     form2 = NewUserForm()
-                    return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
+                    return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
             if request.POST.get('signin'):
                 form = LoginForm(request, data=request.POST)
@@ -244,7 +248,7 @@ class CustomerRegView(View):
                     user = authenticate(username=username, password=password)
                     if user is not None:
                         login(request, user)
-                        messages.success(request, "Welcome you are loggedin.")
+                        messages.success(request, "Welcome you are loggin succesfully !!!!!!!!")
                         return redirect('home')
                     else:
                         messages.error(request, "Invalid username or password.")
@@ -252,7 +256,7 @@ class CustomerRegView(View):
                     messages.error(request, "Invalid username or password.")
                 form1 = LoginForm()
                 form2 = NewUserForm()
-                return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
+                return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -269,7 +273,7 @@ class HomeView(View):
             prodata = Data1.objects.values('Project').distinct()
             fast = Data1.objects.values('Fastqcfol').distinct()
             return render(request, 'profile.html', {'prodata': prodata, 'patient': patient, 'fast': fast,
-                                                    'sqt': ptd_dat, 'smp': newptd, 'sqc': pt})
+                                                    'sqt': ptd_dat, 'smp': newptd, 'sqc': pt, 'active': 'is-danger'})
 
 
 @csrf_exempt

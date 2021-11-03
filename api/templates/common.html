@@ -38,7 +38,7 @@ $(document).ready(function(){
   {% if messages %}
    <script>
     {% for message in messages %}
-        alert("{{ message }}");
+        alert("{{ message }}{{user}}");
     {% endfor %}
    </script>
 {% endif %}
@@ -99,11 +99,26 @@ $(document).ready(function(){
       text-align: center;
       white-space: nowrap;
     }
+    .active{
+    color:white;
+    background-color:DarkOrange;
+    }
+    .active:hover{
+    color:white;
+    background-color:DarkOrange;
+    border-radius:5px;
+    }
+    .navbar-item{
+     border-radius:5px;
+    }
+    .navbar-item:hover{
+     border-radius:5px;
+     background-color:DarkOrange;
+    }
   </style>
 </head>
 
 <body>
-
 
   {% if request.user.is_authenticated %}
   <nav class="navbar is-fixed-top box-shadow-y">
@@ -112,7 +127,7 @@ $(document).ready(function(){
         <i class="fas fa-home icon" style="margin-top:10px;"></i>Home
       </a>
 
-      <a class="navbar-burger nav-toggler" aria-expanded="false" data-target="#navbarid">
+      <a class="navbar-burger nav-toggler ml-auto" aria-expanded="false" data-target="#navbarid">
         <span></span>
         <span></span>
         <span></span>
@@ -139,7 +154,7 @@ $(document).ready(function(){
       </div>
     </div>
   </nav>
-  <div class="container-fluid">
+  <div class="container main" style="margin-top:70px;">
     {% block main %}
     {% endblock main %}
   </div>
@@ -148,6 +163,11 @@ $(document).ready(function(){
       {% block content %}
 
       {% endblock content %}
+    </div>
+    <div class="container-fluid">
+      {% block errorbox %}
+
+      {% endblock errorbox %}
     </div>
   {% endif %}
   <footer>

@@ -350,11 +350,11 @@ header{
 	color: var(--text-grey);
 }
 main{
-	
- padding: 2rem 1.5rem;
- background: #f1f5f9;
- min-height: calc(100vh - 90px);
+     padding: 2rem 1.5rem;
+     background: #f1f5f9;
+     min-height: calc(100vh - 90px);
 }
+
 .cards {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
@@ -641,8 +641,8 @@ thead input {
   /* Table Heading Tooltips */
 
 /*   footer Css   */
-.container-fluid{
-    min-height:75vh;
+.main{
+    min-height:70vh;
 }
 
 .click-zoom input[type=checkbox] {
@@ -706,13 +706,14 @@ thead input {
     cursor: not-allowed;
 }
 .multi{
-    font-weight:300;
-    font-size:12px;
-    background-color:#ff7f50;
+    background-color:DarkSlateGray;
     padding:5px 10px;
     border-radius:5px;
     color:white;
 }
+.multi:hover{
+    color:white;
+ }
 table{
     width:100% !important;
     padding:2% 2% !important;
