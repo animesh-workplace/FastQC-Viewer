@@ -718,3 +718,71 @@ table{
     width:100% !important;
     padding:2% 2% !important;
 }
+
+/*   Toast  */
+
+#success {
+  visibility: visible;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: green;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 8px 10px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#success.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#error {
+  visibility: visible;
+  min-width: 250px;
+  margin-left: -150px;
+  background-color: Orange;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 8px 10px;
+  position: fixed;
+  z-index: 1;
+  left: 40%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#error.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+

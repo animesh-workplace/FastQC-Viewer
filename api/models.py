@@ -1,12 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
-class ProjectTable(models.Model):
-    Project = models.CharField(max_length=200)
-    Patient = models.CharField(max_length=200)
-
-
 SEQUENCE_CHOICE = (
     ('DNA', 'DNA'),
     ('FFPE', 'FFPE'),

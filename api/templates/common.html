@@ -34,14 +34,8 @@ $(document).ready(function(){
     })
 });
 </script>
+
 <!--  <script language="javascript" src="{% static 'js/lightbox.js' %}"></script>-->
-  {% if messages %}
-   <script>
-    {% for message in messages %}
-        alert("{{ message }}{{user}}");
-    {% endfor %}
-   </script>
-{% endif %}
   <style>
     /* Status Icon CSS */
 
@@ -115,6 +109,8 @@ $(document).ready(function(){
      border-radius:5px;
      background-color:DarkOrange;
     }
+
+
   </style>
 </head>
 
@@ -170,6 +166,15 @@ $(document).ready(function(){
       {% endblock errorbox %}
     </div>
   {% endif %}
+  {% if messages %}
+    {% for message in messages%}
+        {% if message.tags == 'success' %}
+            <div class="is-success" id="success" style="text-align:center">{{message}}</div>
+        {% elif message.tags == 'error' %}
+            <div class="is-danger" id="error" style="text-align:center">{{message}}</div>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
   <footer>
     <div class="footer">
       <div class="is-sticky-bottom is-fluid is-desktop pt-5">
@@ -183,7 +188,6 @@ $(document).ready(function(){
       </div>
     </div>
   </footer>
-
   <script>
     const togglePassword = document.querySelector('#togglePassword');
     const togglePassword1 = document.querySelector('#togglePassword1');

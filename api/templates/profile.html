@@ -1,20 +1,19 @@
 {% extends 'common.html' %}
 {% load static %}
 {% block main %}
-
-          <div class="columns is-mobile mt-5" style="padding:0px 10px;">
-              <div class="column">
-                  <div class="card is-medium is-link hero">
-                      <div class="navbar-start">
-                          {% for i in prodata %}
-                                <a class="navbar-item is-3 {% if sqc == i.Project or pro == i.Project %}active{% endif %}" style="text-align:center"
+    <div class="columns is-mobile mt-5" style="padding:0px 10px;">
+         <div class="column">
+             <div class="card is-medium is-link hero">
+                  <div class="navbar-start">
+                       {% for i in prodata %}
+                           <a class="navbar-item is-3 {% if sqc == i.Project or pro == i.Project %}active{% endif %}" style="text-align:center"
                                    href="{% url 'projectdetail' i.Project %}">{{i.Project}}
-                                </a>
-                          {% endfor %}
-                      </div>
+                           </a>
+                       {% endfor %}
                   </div>
-              </div>
-          </div>
+             </div>
+         </div>
+    </div>
 {% if smp and fast %}
     <div class="container">
       <div class="row">

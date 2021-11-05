@@ -3,15 +3,9 @@ from django.contrib import admin
 # Register your models here.
 
 from .models import (
-    ProjectTable,
     Data1,
     Data2
 )
-
-
-@admin.register(ProjectTable)
-class ProjectTableModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'Project', 'Patient']
 
 
 @admin.register(Data1)
