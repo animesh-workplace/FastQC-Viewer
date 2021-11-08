@@ -13,9 +13,8 @@ urlpatterns = [
                   path('profile/<str:pt>', HomeView.as_view(), name="projectdetail"),
                   path('profile/<str:dt>/<str:pt>/<str:data>/<str:data1>', views.show_data, name="show"),
                   path('data/', views.data_store, name="main"),
-                  path('profile/<str:pro>/<str:ptt>/<str:st>/<str:fs>/<str:smmp>', views.multiqc, name="multi"),
-                  path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
-
+                  path('multiqc/<str:pro>/<str:ptt>/<str:st>/<str:smmp>', views.multiqc, name="multi"),
+                  path('logout/', views.logout_request, name='logout'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = 'api.views.handler404'

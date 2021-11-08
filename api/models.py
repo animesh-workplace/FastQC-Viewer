@@ -5,17 +5,17 @@ SEQUENCE_CHOICE = (
     ('DNA', 'DNA'),
     ('FFPE', 'FFPE'),
     ('RNA', 'RNA'),
-    ('Null', 'Null'),
+    ('null', 'null'),
 )
 
 
 class Data1(models.Model):
     Project = models.CharField(max_length=200)
     Patient = models.CharField(max_length=200)
-    Sequence = models.CharField(choices=SEQUENCE_CHOICE, max_length=100)
-    Fastqcfol = models.CharField(max_length=100)
-    Samplename = models.CharField(max_length=100)
-    Sample = models.CharField(max_length=100)
+    Sequence = models.CharField(choices=SEQUENCE_CHOICE, max_length=200, null=True)
+    Fastqcfol = models.CharField(max_length=100, null=True)
+    Samplename = models.CharField(max_length=100, null=True)
+    Sample = models.CharField(null=True, max_length=150)
 
     def __str__(self):
         return str(self.id)

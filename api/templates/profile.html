@@ -22,16 +22,14 @@
               <h4 href="#" style="font-size:15px; font-weight:500; margin-left:20px; color:blue;">
                   {{sqc}}<span class="icon"><i class="fas fa-arrow-right"></i></span></h4>
                      <!--      Table Print        -->
-              <table class="table table-responsive is-fullwidth is-mobile">
+              <table class="display table table-responsive is-fullwidth is-mobile" id="table1">
                   <thead>
                     <tr style="text-align:center">
-
                         <th>ID</th>
                         <th>Patient</th>
                         <th >DNA</th>
                         <th >RNA</th>
                         <th >FFPE</th>
-
                     </tr>
                   </thead>
                   <tbody>
@@ -44,16 +42,18 @@
                                 {% if ptd.Patient == s.Patient%}
                                 <!--             DNA Data Show              -->
                                     {% if s.Sequence == 'DNA' %}
-                                           {% if s.Sample == '131'%}
+                                        {% if s.Sample == '131' %}
                                             <a class="tag is-success is-3" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
-                                            {{break}}
-                                           {% elif s.Sample == '111'%}
-                                            <a class="tag is-danger is-3"  href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                             {{break}}
-                                           {% else %}
+                                        {% elif s.Sample == '3' %}
+                                            <a class="normal is-3">Normal</a>
+                                        {% elif s.Sample == '111' %}
+                                            <a class="tag is-link is-danger is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
+                                        {% elif s.Sample == '1' %}
+                                            <a class="normal is-3">Tumor</a>
+                                        {% elif s.Sample == 'null' %}
                                             <a class="normal is-3">Normal</a>
                                             <a class="normal is-3">Tumor</a>
-                                           {%endif%}
+                                        {%endif%}
                                     {% endif %}
                                 {% endif %}
                            {% endfor %}
@@ -61,15 +61,18 @@
                            <td style="font-size:15px; font-weight:300; display:flex-inline;">
                                 <!--            RNA Data Show               -->
                            {% for s in sqt %}
-                                {% if ptd.Patient == s.Patient%}
+                                {% if ptd.Patient == s.Patient %}
+
                                     {% if s.Sequence == 'RNA' %}
                                         {% if s.Sample == '131' %}
                                             <a class="tag is-success is-3" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
-                                             {{break}}
+                                        {% elif s.Sample == '3' %}
+                                            <a class="normal is-3">Normal</a>
                                         {% elif s.Sample == '111' %}
                                             <a class="tag is-link is-danger is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                             {{break}}
-                                        {% else %}
+                                        {% elif s.Sample == '1' %}
+                                            <a class="normal is-3">Tumor</a>
+                                        {% elif s.Sample == 'null' %}
                                             <a class="normal is-3">Normal</a>
                                             <a class="normal is-3">Tumor</a>
                                         {%endif%}
@@ -83,13 +86,14 @@
                                 {% if ptd.Patient == s.Patient%}
                                     {% if s.Sequence == 'FFPE' %}
                                         {% if s.Sample == '131' %}
-                                            <a class="tag is-success is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
-                                            {{break}}
+                                            <a class="tag is-success is-3" type="button" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Normal</a>
+                                        {% elif s.Sample == '3' %}
+                                            <a class="normal is-3">Normal</a>
                                         {% elif s.Sample == '111' %}
                                             <a class="tag is-link is-danger is-3" href="{% url 'show' s.Project s.Patient s.Sequence s.Samplename %}">Tumor</a>
-                                             {{break}}
-
-                                        {% else %}
+                                        {% elif s.Sample == '1' %}
+                                            <a class="normal is-3">Tumor</a>
+                                        {% elif s.Sample == 'null' %}
                                             <a class="normal is-3">Normal</a>
                                             <a class="normal is-3">Tumor</a>
                                         {%endif%}
@@ -115,7 +119,7 @@
                     <a style="font-size:15px;" href="{% url 'projectdetail' pro %}"><span>{{sqc}}, {{fast}} <i class="fas fa-arrow-right"></i></span></a>
                     <a style="font-size:15xp; " href="{% url 'projectdetail' pro %}"><span>{{spp}}</span></a><br>
 
-                    <a style="font-size:12px; margin-left:5%; font-weight:bold;" class="multi ml-center" href="{%url 'multi' pro pt sqc 'FASTQC_REPORTS' spp %}">MultiQC File</a>
+                    <a style="font-size:12px; margin-left:5%; font-weight:bold;" class="multi ml-center" href="{%url 'multi' pro pt sqc spp %}">MultiQC File</a>
                     <table class="display responsive is-fullwidth is-desktop is-mobile" id="tables" style="text-align:center; font-size:12px;">
                         <thead>
                             <tr class="filters">
