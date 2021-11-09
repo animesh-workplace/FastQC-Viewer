@@ -80,37 +80,39 @@ for i in x:
         os.chdir(o)
         text_file = glob.glob('*.txt')
         image_path = o.split('/')
-        new_split = image_path[12].split('_')
-        image_path.append(new_split[0])
-        image_path.append(new_split[1])
-        image_path.append(new_split[2])
-        image_path.append(new_split[3])
-        image_path.append(new_split[4])
-        image_path.append(new_split[5])
-        with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
-            read_file = f2.read().split()
-            fastqc_file = f1.read().split()
-        image_path.append(read_file[0])
-        image_path.append(read_file[4])
-        image_path.append(read_file[10])
-        image_path.append(read_file[16])
-        image_path.append(read_file[22])
-        image_path.append(read_file[28])
-        image_path.append(read_file[34])
-        image_path.append(read_file[40])
-        image_path.append(read_file[45])
-        image_path.append(read_file[50])
-        image_path.append(read_file[54])
-        image_path.append(fastqc_file[21])
-        image_path.append(fastqc_file[30])
-        image_path.append(fastqc_file[32])
-        # print(image_path[9], image_path[10], image_path[11], image_path[12], image_path[13][4:], image_path[15],
-        #       image_path[16], image_path[17], image_path[18], image_path[19], image_path[20], image_path[21],
-        #       image_path[22], image_path[23], image_path[24], image_path[25], image_path[26], image_path[27],
-        #       image_path[28], image_path[29], image_path[30], image_path[31], image_path[32])
         main_path = image_path.index('media')
         new_path = image_path[main_path:]
         print(new_path)
+        # image_path.append(new_split[0])
+        # image_path.append(new_split[1])
+        # image_path.append(new_split[2])
+        # image_path.append(new_split[3])
+        # image_path.append(new_split[4])
+        # image_path.append(new_split[5])
+        # with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
+        #     read_file = f2.read().split()
+        #     fastqc_file = f1.read().split()
+        # image_path.append(read_file[0])
+        # image_path.append(read_file[4])
+        # image_path.append(read_file[10])
+        # image_path.append(read_file[16])
+        # image_path.append(read_file[22])
+        # image_path.append(read_file[28])
+        # image_path.append(read_file[34])
+        # image_path.append(read_file[40])
+        # image_path.append(read_file[45])
+        # image_path.append(read_file[50])
+        # image_path.append(read_file[54])
+        # image_path.append(fastqc_file[21])
+        # image_path.append(fastqc_file[30])
+        # image_path.append(fastqc_file[32])
+        # # print(image_path[9], image_path[10], image_path[11], image_path[12], image_path[13][4:], image_path[15],
+        # #       image_path[16], image_path[17], image_path[18], image_path[19], image_path[20], image_path[21],
+        # #       image_path[22], image_path[23], image_path[24], image_path[25], image_path[26], image_path[27],
+        # #       image_path[28], image_path[29], image_path[30], image_path[31], image_path[32])
+        # main_path = image_path.index('media')
+        # new_path = image_path[main_path:]
+
 
 
 #     for o in y:

@@ -1,0 +1,11 @@
+PASS	Basic Statistics	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+FAIL	Per base sequence quality	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+PASS	Per tile sequence quality	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+PASS	Per sequence quality scores	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+PASS	Per base sequence content	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+WARN	Per sequence GC content	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+WARN	Per base N content	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+PASS	Sequence Length Distribution	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+PASS	Sequence Duplication Levels	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+FAIL	Overrepresented sequences	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz
+PASS	Adapter Content	2450111_TruSeqCD_AHT377DSXX_L1_R1.fastq.gz

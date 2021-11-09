@@ -1,22 +1,18 @@
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import NewUserForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from api.forms import LoginForm, NewUserForm
-from zipfile import ZipFile
 import os
 import time
-import re
-from os import listdir
-from os.path import isfile, join
+
 
 class CustomerRegView(View):
     def get(self, request):
         form1 = LoginForm()
         form2 = NewUserForm()
-        return render(request, 'login_regis.html', {'login_form': form1, 'register_form': form2})
+        return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
     def post(self, request):
         if request.method == "POST":
@@ -25,11 +21,11 @@ class CustomerRegView(View):
                 if form.is_valid():
                     user = form.save()
                     login(request, user)
-                    messages.success(request, "Registration successful." )
+                    messages.success(request, "Registration successful.")
                     return redirect('login')
                 messages.error(request, "Unsuccessful registration. Invalid information.")
                 form = NewUserForm()
-                return render (request, 'login_regis.html', {'register_form':form})
+                return render(request, 'index.html', {'register_form': form})
 
             if request.POST.get('signin'):
                 form = LoginForm(request, data=request.POST)
@@ -42,12 +38,11 @@ class CustomerRegView(View):
                         messages.info(request, f"You are now logged in as {username}.")
                         return redirect('home')
                     else:
-                        messages.error(request,"Invalid username or password.")
+                        messages.error(request, "Invalid username or password.")
                 else:
-                    messages.error(request,"Invalid username or password.")
+                    messages.error(request, "Invalid username or password.")
                 form = LoginForm()
-                return render(request, 'login_regis.html', {'login_form': form})
-
+                return render(request, 'index.html', {'login_form': form})
 
 
 def home(request):
@@ -75,5 +70,5 @@ def home(request):
         for ele in sep:
             res.append(ele.split('\\'))
         data.append(newdict)
-        print(sep)    
+        print(sep)
     return render(request, 'profile.html', {'data': data})
