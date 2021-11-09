@@ -13,6 +13,7 @@ urlpatterns = [
     path('profile/<str:pt>', HomeView.as_view(), name="projectdetail"),
     path('profile/<str:dt>/<str:pt>/<str:data>/<str:data1>', views.show_data, name="show"),
     path('refresh/', views.data_store, name="main"),
+    path('refresh/', views.data1_store, name="main1"),
     path('multiqc/<str:pro>/<str:ptt>/<str:st>/<str:smmp>', views.multiqc, name="multi"),
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

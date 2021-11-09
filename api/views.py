@@ -15,6 +15,7 @@ import os
 import glob
 from django.views.decorators.csrf import csrf_exempt
 
+
 def table_first():
     path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
@@ -253,6 +254,18 @@ def data_store(request):
         user = request.user
         table_first()
         null_value()
+        messages.success(request, f"Data Refresh Successfully. {user}")
+        return redirect('home')
+    else:
+        user = request.user
+        messages.error(request, f"Sorry {user} You are not authorized")
+        return redirect('home')
+
+
+@csrf_exempt
+def data1_store(request):
+    if request.user.is_authenticated:
+        user = request.user
         table_second()
         messages.success(request, f"Data Refresh Successfully. {user}")
         return redirect('home')
