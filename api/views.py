@@ -15,7 +15,6 @@ import os
 import glob
 from django.views.decorators.csrf import csrf_exempt
 
-
 def table_first():
     path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
@@ -268,7 +267,7 @@ class CustomerRegView(View):
     def get(self, request):
         form1 = LoginForm()
         form2 = NewUserForm()
-        return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
+        return render(request, 'home.html', {'login_form': form1, 'register_form': form2})
 
     @csrf_exempt
     def post(self, request):
@@ -284,7 +283,7 @@ class CustomerRegView(View):
                     messages.error(request, "Sorry Unsuccessful registration. Please Type valid information")
                     form1 = LoginForm()
                     form2 = NewUserForm()
-                    return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
+                    return render(request, 'home.html', {'login_form': form1, 'register_form': form2})
 
             if request.POST.get('signin'):
                 form = LoginForm(request, data=request.POST)
@@ -302,7 +301,7 @@ class CustomerRegView(View):
                     messages.error(request, "Sorry Invalid username or password.")
                 form1 = LoginForm()
                 form2 = NewUserForm()
-                return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
+                return render(request, 'home.html', {'login_form': form1, 'register_form': form2})
 
 
 @method_decorator(login_required, name='dispatch')
