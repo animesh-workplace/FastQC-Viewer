@@ -249,12 +249,12 @@ def table_second():
 
 # Main Code
 @csrf_exempt
-def data_store(request):
+def firs_data(request):
     if request.user.is_authenticated:
         user = request.user
         table_first()
         null_value()
-        messages.success(request, f"Data Refresh Successfully. {user}")
+        messages.success(request, f"Data1 Refresh Successfully. {user}")
         return redirect('home')
     else:
         user = request.user
@@ -263,11 +263,11 @@ def data_store(request):
 
 
 @csrf_exempt
-def data1_store(request):
+def second_data(request):
     if request.user.is_authenticated:
         user = request.user
         table_second()
-        messages.success(request, f"Data Refresh Successfully. {user}")
+        messages.success(request, f"Data2 Refresh Successfully. {user}")
         return redirect('home')
     else:
         user = request.user
