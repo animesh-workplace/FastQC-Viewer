@@ -3,6 +3,8 @@ from .views import CustomerRegView, HomeView
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
+from django.contrib.auth import views as auth_views
+from django.conf.urls import handler404, handler500
 
 urlpatterns = [
     path('', CustomerRegView.as_view(), name="login"),
@@ -15,3 +17,6 @@ urlpatterns = [
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+handler404 = 'api.views.handler404'
+
+handler500 = 'api.views.handler500'

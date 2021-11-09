@@ -15,7 +15,6 @@ import os
 import glob
 from django.views.decorators.csrf import csrf_exempt
 
-
 def table_first():
     path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
@@ -349,4 +348,17 @@ def multiqc(request, pro=None, ptt=None, st=None, smmp=None):
         if pro is not None and ptt is not None and st is not None and smmp is not None:
             path_name = 'Project/' + pro + '/' + ptt + '/' + st + \
                         '/FASTQC_REPORTS' + '/' + smmp + '/multiqc_report.html'
-            return render(request, path_name)
+            if path_name:
+                return render(request, path_name)
+            else:
+                return render(request, '500.html')
+
+
+def handler404(request, exception):
+    messages.error("Sorry Page Not Found")
+    return render(request, '404.html')
+
+
+def handler500(request):
+    messages.error("Sorry Page Not Found")
+    return render(request, '500.html')
