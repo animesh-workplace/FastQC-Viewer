@@ -131,12 +131,13 @@ $(document).ready(function(){
 
     </div>
     <div id="navbarid" class="navbar-menu">
+      {% if request.user.is_superuser %}
       <div class="navbar-start">
-        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'main' %}">
-        Refresh Data
+        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'refresh_data' %}">
+          Refresh Data
         </a>
       </div>
-
+      {%endif%}
       <div class="navbar-end">
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link is-danger is-right">
@@ -160,7 +161,7 @@ $(document).ready(function(){
 
       {% endblock content %}
     </div>
-    <div class="container-fluid">
+    <div class="container main" style="margin-top:70px;">
       {% block errorbox %}
 
       {% endblock errorbox %}

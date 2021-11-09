@@ -15,8 +15,7 @@ import os
 import glob
 from django.views.decorators.csrf import csrf_exempt
 
-
-def tablefirst():
+def table_first():
     path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
@@ -81,7 +80,51 @@ def tablefirst():
                     insert.save()
 
 
-def tablesecond():
+def null_value():
+    path_file = os.path.join(BASE_DIR / 'media/Project')
+    dirfiles = os.listdir(path_file)
+    fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
+    dirs = []
+    for file in fullpaths:
+        if os.path.isdir(file): dirs.append(file)
+        os.getcwd()
+    x = list(dirs)
+    for i in x:
+        project_path = os.listdir(i)
+        folder_project = map(lambda name: os.path.join(i, name), project_path)
+        fll = []
+        for profolder in folder_project:
+            if os.path.isdir(profolder): fll.append(profolder)
+            os.getcwd()
+        y1 = list(fll)
+        for j in y1:
+            pat_path = j.split('/')
+            mdd = pat_path.index('media')
+            now_pat = pat_path[mdd:]
+            project = now_pat[2]
+            pat = now_pat[3]
+
+            if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='DNA')).exists():
+                pass
+            else:
+                entry = Data1(Project=project, Patient=pat, Sequence='DNA', Fastqcfol='FASTQC_REPORTS',
+                              Samplename='null', Sample='null')
+                entry.save()
+            if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='RNA')).exists():
+                pass
+            else:
+                entry = Data1(Project=project, Patient=pat, Sequence='RNA', Fastqcfol='FASTQC_REPORTS',
+                              Samplename='null', Sample='null')
+                entry.save()
+            if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='FFPE')).exists():
+                pass
+            else:
+                entry = Data1(Project=project, Patient=pat, Sequence='FFPE', Fastqcfol='FASTQC_REPORTS',
+                              Samplename='null', Sample='null')
+                entry.save()
+
+
+def table_second():
     path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
@@ -203,71 +246,20 @@ def tablesecond():
                 st.save()
 
 
-def null_value():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
-    dirfiles = os.listdir(path_file)
-    fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
-    dirs = []
-    for file in fullpaths:
-        if os.path.isdir(file): dirs.append(file)
-        os.getcwd()
-    x = list(dirs)
-    for i in x:
-        project_path = os.listdir(i)
-        folder_project = map(lambda name: os.path.join(i, name), project_path)
-        fll = []
-        for profolder in folder_project:
-            if os.path.isdir(profolder): fll.append(profolder)
-            os.getcwd()
-        y1 = list(fll)
-        for j in y1:
-            pat_path = j.split('/')
-            mdd = pat_path.index('media')
-            now_pat = pat_path[mdd:]
-            project = now_pat[2]
-            pat = now_pat[3]
-
-            if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='DNA')).exists():
-                pass
-            else:
-                entry = Data1(Project=project, Patient=pat, Sequence='DNA', Fastqcfol='FASTQC_REPORTS',
-                              Samplename='null', Sample='null')
-                entry.save()
-            if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='RNA')).exists():
-                pass
-            else:
-                entry = Data1(Project=project, Patient=pat, Sequence='RNA', Fastqcfol='FASTQC_REPORTS',
-                              Samplename='null', Sample='null')
-                entry.save()
-            if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='FFPE')).exists():
-                pass
-            else:
-                entry = Data1(Project=project, Patient=pat, Sequence='FFPE', Fastqcfol='FASTQC_REPORTS',
-                              Samplename='null', Sample='null')
-                entry.save()
-
-
 # Main Code
 @csrf_exempt
 def data_store(request):
     if request.user.is_authenticated:
-        if request.user.is_superuser:
-            user = request.user
-            # First Table Data Uploaded
-            tablefirst()
-            # Second Table Data Uploaded
-            tablesecond()
-            # Call Null Value Functions
+        user = request.user
+        if user.is_superuser or user.is_staff:
+            table_first()
             null_value()
+            table_second()
             messages.success(request, f"Data Refresh Successfully. {user}")
-            response = redirect('/profile/')
-            return response
-
+            return redirect('home')
         else:
-            user = request.user
-            messages.error(request, f"Sorry {user} You have not Permission to Refresh Data !!!")
-            response = redirect('/profile/')
-            return response
+            messages.error(request, f"Sorry {user} You are not authorized")
+            return redirect('home')
 
 
 class CustomerRegView(View):
@@ -363,8 +355,10 @@ def multiqc(request, pro=None, ptt=None, st=None, smmp=None):
 
 
 def handler404(request, exception):
+    messages.error("Sorry Page Not Found")
     return render(request, '404.html')
 
 
 def handler500(request):
+    messages.error("Sorry Page Not Found")
     return render(request, '500.html')
