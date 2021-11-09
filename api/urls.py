@@ -4,8 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
-from django.conf.urls import handler404, handler500
-
 urlpatterns = [
     path('', CustomerRegView.as_view(), name="login"),
     path('accounts/login/', CustomerRegView.as_view()),

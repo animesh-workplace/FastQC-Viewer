@@ -15,6 +15,7 @@ import os
 import glob
 from django.views.decorators.csrf import csrf_exempt
 
+
 def table_first():
     path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
@@ -267,7 +268,7 @@ class CustomerRegView(View):
     def get(self, request):
         form1 = LoginForm()
         form2 = NewUserForm()
-        return render(request, 'home.html', {'login_form': form1, 'register_form': form2})
+        return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
     @csrf_exempt
     def post(self, request):
@@ -283,7 +284,7 @@ class CustomerRegView(View):
                     messages.error(request, "Sorry Unsuccessful registration. Please Type valid information")
                     form1 = LoginForm()
                     form2 = NewUserForm()
-                    return render(request, 'home.html', {'login_form': form1, 'register_form': form2})
+                    return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
             if request.POST.get('signin'):
                 form = LoginForm(request, data=request.POST)
@@ -301,7 +302,7 @@ class CustomerRegView(View):
                     messages.error(request, "Sorry Invalid username or password.")
                 form1 = LoginForm()
                 form2 = NewUserForm()
-                return render(request, 'home.html', {'login_form': form1, 'register_form': form2})
+                return render(request, 'index.html', {'login_form': form1, 'register_form': form2})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -348,17 +349,4 @@ def multiqc(request, pro=None, ptt=None, st=None, smmp=None):
         if pro is not None and ptt is not None and st is not None and smmp is not None:
             path_name = 'Project/' + pro + '/' + ptt + '/' + st + \
                         '/FASTQC_REPORTS' + '/' + smmp + '/multiqc_report.html'
-            if path_name:
-                return render(request, path_name)
-            else:
-                return render(request, '500.html')
-
-
-def handler404(request, exception):
-    messages.error("Sorry Page Not Found")
-    return render(request, '404.html')
-
-
-def handler500(request):
-    messages.error("Sorry Page Not Found")
-    return render(request, '500.html')
+            return render(request, path_name)

@@ -117,63 +117,58 @@ $(document).ready(function(){
 <body>
 
   {% if request.user.is_authenticated %}
-  <nav class="navbar is-fixed-top box-shadow-y">
-    <div class="navbar-brand toggler">
-      <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'home' %}">
-        <i class="fas fa-home icon" style="margin-top:10px;"></i>Home
-      </a>
-
-      <a class="navbar-burger nav-toggler ml-auto" aria-expanded="false" data-target="#navbarid">
-        <span></span>
-        <span></span>
-        <span></span>
-      </a>
-
-    </div>
-    <div id="navbarid" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'main' %}">
-        Refresh Data
+    <nav class="navbar is-fixed-top box-shadow-y">
+      <div class="navbar-brand toggler">
+        <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'home' %}">
+          <i class="fas fa-home icon" style="margin-top:10px;"></i>Home
         </a>
-      </div>
 
-      <div class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link is-danger is-right">
-            <strong>{{user}}</strong>
+        <a class="navbar-burger nav-toggler ml-auto" aria-expanded="false" data-target="#navbarid">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+
+      </div>
+      <div id="navbarid" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item has-text-weight-bold has-text-black is-link" href="{% url 'main' %}">
+          Refresh Data
           </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="{% url 'home' %}">Profile</a>
-            <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link is-danger is-right">
+              <strong>{{user}}</strong>
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="{% url 'home' %}">Profile</a>
+              <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
+            </div>
           </div>
         </div>
       </div>
+    </nav>
+    <div class="container main" style="margin-top:70px;">
+      {% block main %}
+      {% endblock main %}
     </div>
-  </nav>
-  <div class="container main" style="margin-top:70px;">
-    {% block main %}
-    {% endblock main %}
-  </div>
   {% else %}
     <div class="container-fluid">
       {% block content %}
 
       {% endblock content %}
     </div>
-    <div class="container-fluid">
-      {% block errorbox %}
-
-      {% endblock errorbox %}
-    </div>
   {% endif %}
   {% if messages %}
-    {% for message in messages%}
-        {% if message.tags == 'success' %}
-            <div class="is-success" id="success" style="text-align:center">{{message}}</div>
-        {% elif message.tags == 'error' %}
-            <div class="is-danger" id="error" style="text-align:center">{{message}}</div>
-        {% endif %}
-    {% endfor %}
+       {% for message in messages%}
+            {% if message.tags == 'success' %}
+                 <div class="is-success" id="success" style="text-align:center">{{message}}</div>
+            {% elif message.tags == 'error' %}
+                  <div class="is-danger" id="error" style="text-align:center">{{message}}</div>
+            {% endif %}
+       {% endfor %}
   {% endif %}
   <footer>
     <div class="footer">
