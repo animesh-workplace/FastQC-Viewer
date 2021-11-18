@@ -80,227 +80,53 @@ for i in x:
         os.chdir(o)
         text_file = glob.glob('*.txt')
         image_path = o.split('/')
-        main_path = image_path.index('media')
-        new_path = image_path[main_path:]
-        print(new_path)
-        # image_path.append(new_split[0])
-        # image_path.append(new_split[1])
-        # image_path.append(new_split[2])
-        # image_path.append(new_split[3])
-        # image_path.append(new_split[4])
-        # image_path.append(new_split[5])
-        # with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
-        #     read_file = f2.read().split()
-        #     fastqc_file = f1.read().split()
-        # image_path.append(read_file[0])
-        # image_path.append(read_file[4])
-        # image_path.append(read_file[10])
-        # image_path.append(read_file[16])
-        # image_path.append(read_file[22])
-        # image_path.append(read_file[28])
-        # image_path.append(read_file[34])
-        # image_path.append(read_file[40])
-        # image_path.append(read_file[45])
-        # image_path.append(read_file[50])
-        # image_path.append(read_file[54])
-        # image_path.append(fastqc_file[21])
-        # image_path.append(fastqc_file[30])
-        # image_path.append(fastqc_file[32])
-        # # print(image_path[9], image_path[10], image_path[11], image_path[12], image_path[13][4:], image_path[15],
-        # #       image_path[16], image_path[17], image_path[18], image_path[19], image_path[20], image_path[21],
-        # #       image_path[22], image_path[23], image_path[24], image_path[25], image_path[26], image_path[27],
-        # #       image_path[28], image_path[29], image_path[30], image_path[31], image_path[32])
-        # main_path = image_path.index('media')
-        # new_path = image_path[main_path:]
+        md = image_path.index('media')
+        new_root = image_path[md:]
+        new_split = new_root[7].split('_')
+        new_root.append(new_split[0])
+        new_root.append(new_split[1])
+        new_root.append(new_split[2])
+        new_root.append(new_split[3])
+        new_root.append(new_split[4])
+        new_root.append(new_split[5])
+        with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
+            read_file = f2.read().split()
+            fastqc_file = f1.read().split()
+        new_root.append(read_file[0])
+        new_root.append(read_file[4])
+        new_root.append(read_file[10])
+        new_root.append(read_file[16])
+        new_root.append(read_file[22])
+        new_root.append(read_file[28])
+        new_root.append(read_file[34])
+        new_root.append(read_file[40])
+        new_root.append(read_file[45])
+        new_root.append(read_file[50])
+        new_root.append(read_file[54])
+        new_root.append(fastqc_file[21])
+        new_root.append(fastqc_file[30])
+        new_root.append(fastqc_file[32])
+        sequence = new_root[4]
+        fastqc = new_root[5]
+        samplename = new_root[6]
+        pathname = new_root[7]
+        trusqc = new_root[9]
+        flowcell = new_root[10]
+        lane = new_root[11]
+        row = new_root[12]
+        bs = new_root[14]
+        pbsq = new_root[15]
+        ptsq = new_root[16]
+        psqs = new_root[17]
+        pbsc = new_root[18]
+        psgc = new_root[19]
+        pbnc = new_root[20]
+        sld = new_root[21]
+        sdl = new_root[22]
+        oss = new_root[23]
+        ac = new_root[24]
+        tsqc = new_root[25]
+        sqclth = new_root[26]
+        gc = new_root[27]
+        print(new_root)
 
-
-
-#     for o in y:
-#         os.chdir(o)
-#         text_file = glob.glob('*.txt')
-#         image_path = o.split('\\')
-#         new_split = image_path[8].split('_')
-#         name = ['a', 'b', 'c', 'd', 'e', 'Project_name', 'Sub_folder', 'fastqc', 'Path', 'Date', 'Sample_name',
-#                 'TrueSq', 'Flowcell', 'Lane', 'Row', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
-#                 '11', 'Total_Sequence', 'Lenth', '%GC', 'im1', 'im2', 'im3', 'im4', 'im5',
-#                 'im6', 'im7', 'im8', 'img9']
-#         path_time = os.path.getatime(o)
-#         c_ti = time.ctime(path_time)
-#         t_obj = time.strptime(c_ti)
-#         T_stamp = time.strftime("%d-%m-%Y %H:%M:%S", t_obj)
-#         image_path.append(T_stamp[0:10])
-#         with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
-#             read_file = f2.read().split()
-#             fastqc_file = f1.read().split()
-#
-#         image_path.append(new_split[0])
-#         image_path.append(new_split[1])
-#         image_path.append(new_split[2])
-#         image_path.append(new_split[3])
-#         image_path.append(new_split[4])
-#         image_path.append(read_file[0])
-#         image_path.append(read_file[4])
-#         image_path.append(read_file[10])
-#         image_path.append(read_file[16])
-#         image_path.append(read_file[22])
-#         image_path.append(read_file[28])
-#         image_path.append(read_file[34])
-#         image_path.append(read_file[40])
-#         image_path.append(read_file[45])
-#         image_path.append(read_file[50])
-#         image_path.append(read_file[54])
-#         image_path.append(fastqc_file[21])
-#         image_path.append(fastqc_file[30])
-#         image_path.append(fastqc_file[32])
-#         imagefolder.append(o)
-#     img_list = []
-#     for d in imagefolder:
-#         imagefol_path = os.listdir(d)
-#         imgfolder_list = map(lambda name: os.path.join(d, name), imagefol_path)
-#         fll = []
-#         for imgfolder in imgfolder_list:
-#             if os.path.isdir(imgfolder): fll.append(imgfolder)
-#             os.getcwd()
-#         y1 = list(fll)
-#         img_list.append(y1[1])
-#     for img in img_list:
-#         for root, dirs, files, in os.walk(img):
-#             image_path.append(files[0])
-#             image_path.append(files[1])
-#             image_path.append(files[2])
-#             image_path.append(files[3])
-#             image_path.append(files[4])
-#             image_path.append(files[5])
-#             image_path.append(files[6])
-#             image_path.append(files[7])
-#             image_path.append(files[8])
-#
-#         dictfile = zip(name, image_path)
-#         newdict = dict(dictfile)
-#         data.append(newdict)
-#
-# print(type(data[0].values()))
-# # file_name1 = "/home/nibmg/Desktop/folderpro/backend/api/zipfiles/2240111_TruseqNano_HYGWFDSXY_L1_R2_fastqc.zip"
-# # file_name2 = "/home/nibmg/Desktop/folderpro/backend/api/zipfiles/2240111_TruseqNano_HYGWFDSXY_L1_R1_fastqc.zip"
-# #
-# #
-# # counts = Counter()
-# # for c_dir, dirnames, filenames in os.walk('.'):
-# #     for filename in filenames:
-# #         before_ext, extension = os.path.splitext(filename)
-# #         counts[extension] += 1
-# # with ZipFile(file_name1, 'r') as zip:
-# #     zip.printdir()
-# #     print(zip.infolist())
-# #
-# #     # extracting all the files
-# #     print('Extracting all the files now...')
-# #     zip.extractall('zipfiles')
-# #     print('Done!')
-# #     print(dir(zip))
-# # for extension, count in counts.items():
-# #     ext = f"{extension:6}{count}"
-# #     print("The Extension Name", type(ext))
-# # Path where we have to count files and directories
-#
-# #              For Zipfolder subdirectiory
-# import forloop as forloop
-#
-# HOME_FOLDER = 'E:/Python Program/FolderPro/api/static/zipfiles'
-# dirfiles = os.listdir(HOME_FOLDER)
-# fullpaths = map(lambda name: os.path.join(HOME_FOLDER, name), dirfiles)
-# dirs = []
-# files = []
-# data = []
-# text_list = []
-# for file in fullpaths:
-#     if os.path.isdir(file): dirs.append(file)
-#     if os.path.isfile(file): files.append(file)
-# # print("Fullpath Files list", dirs)
-#
-# x = list(dirs)
-# # for path, dirs, f in os.walk(HOME_FOLDER):
-# #     # print(path)
-# #     print("Files", f)
-#
-# for i in x:
-#     sep = i.split('_')
-#     os.chdir(i)
-#     text_file = glob.glob('*.txt')
-#     image_path = i.split('\\')
-#     new_split = image_path[1].split('_')
-#     name = ['Sample_name', 'True_Sequence', 'Flowcell', 'Lane', 'Rack', 'Fastqc', 'Date', 'Path',
-#             '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', 'Total_Sequence', 'Lenth', '%GC']
-#     path_time = os.path.getctime(i)
-#     c_ti = time.ctime(path_time)
-#     new_split.append(c_ti)
-#     new_split.append(image_path[1])
-#     print(new_split)
-#     with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
-#         read_file = f2.read().split()
-#         fastqc_file = f1.read().split()
-#     new_split.append(read_file[0])
-#     new_split.append(read_file[4])
-#     new_split.append(read_file[10])
-#     new_split.append(read_file[16])
-#     new_split.append(read_file[22])
-#     new_split.append(read_file[28])
-#     new_split.append(read_file[34])
-#     new_split.append(read_file[40])
-#     new_split.append(read_file[45])
-#     new_split.append(read_file[50])
-#     new_split.append(read_file[54])
-#     new_split.append(fastqc_file[21])
-#     new_split.append(fastqc_file[30])
-#     new_split.append(fastqc_file[32])
-#     dictfile = zip(name, new_split)
-#     newdict = dict(dictfile)
-#     data.append(newdict)
-# print(data)
-#         # for f in text_file:
-#     #     infile = open(f, 'r')
-#     #     read_f = infile.read()
-#     #     print(read_f)
-#     # for f in text_file:
-#     #     outfile = open(f, 'r')
-#     #     read_file = outfile.read().split()
-#     #     outfile.close()
-#     #     # print(read_file)
-#     # sep.append(read_file[0])
-#     # sep.append(read_file[4])
-#     # sep.append(read_file[10])
-#     # sep.append(read_file[16])
-#     # sep.append(read_file[22])
-#     # sep.append(read_file[28])
-#     # sep.append(read_file[34])
-#     # sep.append(read_file[40])
-#     # sep.append(read_file[45])
-#     # sep.append(read_file[50])
-#     # sep.append(read_file[54])
-#     # dictfile = zip(name, sep)
-#     # newdict = dict(dictfile)
-#     # data.append(newdict)
-#
-#
-# # print(i)
-# # print(res[4][0] == 'R2')
-# # print(res[0][1] == '2240131')
-# #
-# # files_list = [f for f in listdir('E:/Python Program/FolderPro/api/static/zipfiles')
-# #               if isfile(join('E:/Python Program/FolderPro/api/static/zipfiles', f))]
-# # print("Before For Loop", files_list)
-# # noOfFiles = 0
-# # noOfDir = 0
-# #
-# # for base, dirs, files in os.walk(HOME_FOLDER):
-# # print('Looking in : ', base)
-# # for directories in dirs:
-# #     noOfDir += 1
-# # for Files in files:
-# #     noOfFiles += 1
-# # print(dirs)
-# #
-# # print(type(files))
-# # print('Number of files', noOfFiles)
-# # print('Number of Directories', noOfDir)
-# # print('Total:', (noOfDir + noOfFiles))
