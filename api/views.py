@@ -213,7 +213,7 @@ def table_second():
             image_path.append(fastqc_file[21])
             image_path.append(fastqc_file[30])
             image_path.append(fastqc_file[32])
-            main_path = image_path.index('media')
+            main_path = image_path.index('sf_Storage')
             new_path = image_path[main_path:]
             sequence = new_path[4]
             fastqc = new_path[5]
