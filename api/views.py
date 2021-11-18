@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def table_first():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
+    path_file = os.path.join('/media/sf_Storage/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -64,7 +64,7 @@ def table_first():
                 if os.path.isdir(l1): path2.append(l1.split('/'))
                 os.getcwd()
             for s1 in path2:
-                main_path = s1.index('media')
+                main_path = s1.index('sf_Storage')
                 new_path = s1[main_path:]
                 project = new_path[2]
                 patient = new_path[3]
@@ -82,7 +82,7 @@ def table_first():
 
 
 def null_value():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
+    path_file = os.path.join('/media/sf_Storage/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -100,7 +100,7 @@ def null_value():
         y1 = list(fll)
         for j in y1:
             pat_path = j.split('/')
-            mdd = pat_path.index('media')
+            mdd = pat_path.index('sf_Storage')
             now_pat = pat_path[mdd:]
             project = now_pat[2]
             pat = now_pat[3]
@@ -126,7 +126,7 @@ def null_value():
 
 
 def table_second():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
+    path_file = os.path.join('/media/sf_Storage/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -188,7 +188,7 @@ def table_second():
             os.chdir(o)
             text_file = glob.glob('*.txt')
             image_path = o.split('/')
-            md = image_path.index('media')
+            md = image_path.index('sf_Storage')
             new_root = image_path[md:]
             new_split = new_root[7].split('_')
             new_root.append(new_split[0])
