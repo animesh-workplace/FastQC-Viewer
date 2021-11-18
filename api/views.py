@@ -100,7 +100,7 @@ def null_value():
         y1 = list(fll)
         for j in y1:
             pat_path = j.split('/')
-            mdd = pat_path.index('media')
+            mdd = pat_path.index('sf_Storage')
             now_pat = pat_path[mdd:]
             project = now_pat[2]
             print(project, now_pat)
