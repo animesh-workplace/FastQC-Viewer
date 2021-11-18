@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def table_first():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
+    path_file = os.path.join('/media/sf_Storage/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -82,7 +82,7 @@ def table_first():
 
 
 def null_value():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
+    path_file = os.path.join('/media/sf_Storage/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -108,25 +108,25 @@ def null_value():
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='DNA')).exists():
                 pass
             else:
-                entry = Data1(Project=project, Patient=pat, Sequence='DNA', Fastqcfol='FASTQC_REPORTS',
+                entry = Data1(Project=project, Patient=pat, Sequence='DNA', Fastqcfol='Fastqc_folder',
                               Samplename='null', Sample='null')
                 entry.save()
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='RNA')).exists():
                 pass
             else:
-                entry = Data1(Project=project, Patient=pat, Sequence='RNA', Fastqcfol='FASTQC_REPORTS',
+                entry = Data1(Project=project, Patient=pat, Sequence='RNA', Fastqcfol='Fastqc_folder',
                               Samplename='null', Sample='null')
                 entry.save()
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='FFPE')).exists():
                 pass
             else:
-                entry = Data1(Project=project, Patient=pat, Sequence='FFPE', Fastqcfol='FASTQC_REPORTS',
+                entry = Data1(Project=project, Patient=pat, Sequence='FFPE', Fastqcfol='Fastqc_folder',
                               Samplename='null', Sample='null')
                 entry.save()
 
 
 def table_second():
-    path_file = os.path.join(BASE_DIR / 'media/Project')
+    path_file = os.path.join('/media/sf_Storage/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
