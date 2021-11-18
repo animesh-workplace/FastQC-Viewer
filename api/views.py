@@ -17,7 +17,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def table_first():
-    path_file = os.path.join('/media/sf_Storage/Project')
+    path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -82,7 +82,7 @@ def table_first():
 
 
 def null_value():
-    path_file = os.path.join('/media/sf_Storage/Project')
+    path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -100,34 +100,33 @@ def null_value():
         y1 = list(fll)
         for j in y1:
             pat_path = j.split('/')
-            mdd = pat_path.index('sf_Storage')
+            mdd = pat_path.index('media')
             now_pat = pat_path[mdd:]
             project = now_pat[2]
-            print(project, now_pat)
             pat = now_pat[3]
 
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='DNA')).exists():
                 pass
             else:
-                entry = Data1(Project=project, Patient=pat, Sequence='DNA', Fastqcfol='Fastqc_folder',
+                entry = Data1(Project=project, Patient=pat, Sequence='DNA', Fastqcfol='FASTQC_REPORTS',
                               Samplename='null', Sample='null')
                 entry.save()
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='RNA')).exists():
                 pass
             else:
-                entry = Data1(Project=project, Patient=pat, Sequence='RNA', Fastqcfol='Fastqc_folder',
+                entry = Data1(Project=project, Patient=pat, Sequence='RNA', Fastqcfol='FASTQC_REPORTS',
                               Samplename='null', Sample='null')
                 entry.save()
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='FFPE')).exists():
                 pass
             else:
-                entry = Data1(Project=project, Patient=pat, Sequence='FFPE', Fastqcfol='Fastqc_folder',
+                entry = Data1(Project=project, Patient=pat, Sequence='FFPE', Fastqcfol='FASTQC_REPORTS',
                               Samplename='null', Sample='null')
                 entry.save()
 
 
 def table_second():
-    path_file = os.path.join('/media/sf_Storage/Project')
+    path_file = os.path.join(BASE_DIR / 'media/Project')
     dirfiles = os.listdir(path_file)
     fullpaths = map(lambda name: os.path.join(path_file, name), dirfiles)
     dirs = []
@@ -213,7 +212,7 @@ def table_second():
             image_path.append(fastqc_file[21])
             image_path.append(fastqc_file[30])
             image_path.append(fastqc_file[32])
-            main_path = image_path.index('sf_Storage')
+            main_path = image_path.index('media')
             new_path = image_path[main_path:]
             sequence = new_path[4]
             fastqc = new_path[5]
