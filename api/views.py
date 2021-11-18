@@ -191,6 +191,7 @@ def table_second():
             md = image_path.index('sf_Storage')
             new_root = image_path[md:]
             new_split = new_root[7].split('_')
+            print(new_split)
             new_root.append(new_split[0])
             new_root.append(new_split[1])
             new_root.append(new_split[2])
