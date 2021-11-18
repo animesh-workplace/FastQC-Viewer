@@ -188,54 +188,54 @@ def table_second():
             os.chdir(o)
             text_file = glob.glob('*.txt')
             image_path = o.split('/')
-            new_split = image_path[12].split('_')
-            image_path.append(new_split[0])
-            image_path.append(new_split[1])
-            image_path.append(new_split[2])
-            image_path.append(new_split[3])
-            image_path.append(new_split[4])
-            image_path.append(new_split[5])
+            md = image_path.index('media')
+            new_root = image_path[md:]
+            new_split = new_root[7].split('_')
+            new_root.append(new_split[0])
+            new_root.append(new_split[1])
+            new_root.append(new_split[2])
+            new_root.append(new_split[3])
+            new_root.append(new_split[4])
+            new_root.append(new_split[5])
             with open(text_file[0], 'r') as f1, open(text_file[1], 'r') as f2:
                 read_file = f2.read().split()
                 fastqc_file = f1.read().split()
-            image_path.append(read_file[0])
-            image_path.append(read_file[4])
-            image_path.append(read_file[10])
-            image_path.append(read_file[16])
-            image_path.append(read_file[22])
-            image_path.append(read_file[28])
-            image_path.append(read_file[34])
-            image_path.append(read_file[40])
-            image_path.append(read_file[45])
-            image_path.append(read_file[50])
-            image_path.append(read_file[54])
-            image_path.append(fastqc_file[21])
-            image_path.append(fastqc_file[30])
-            image_path.append(fastqc_file[32])
-            main_path = image_path.index('media')
-            new_path = image_path[main_path:]
-            sequence = new_path[4]
-            fastqc = new_path[5]
-            samplename = new_path[6]
-            pathname = new_path[7]
-            trusqc = new_path[9]
-            flowcell = new_path[10]
-            lane = new_path[11]
-            row = new_path[12]
-            bs = new_path[14]
-            pbsq = new_path[15]
-            ptsq = new_path[16]
-            psqs = new_path[17]
-            pbsc = new_path[18]
-            psgc = new_path[19]
-            pbnc = new_path[20]
-            sld = new_path[21]
-            sdl = new_path[22]
-            oss = new_path[23]
-            ac = new_path[24]
-            tsqc = new_path[25]
-            sqclth = new_path[26]
-            gc = new_path[27]
+            new_root.append(read_file[0])
+            new_root.append(read_file[4])
+            new_root.append(read_file[10])
+            new_root.append(read_file[16])
+            new_root.append(read_file[22])
+            new_root.append(read_file[28])
+            new_root.append(read_file[34])
+            new_root.append(read_file[40])
+            new_root.append(read_file[45])
+            new_root.append(read_file[50])
+            new_root.append(read_file[54])
+            new_root.append(fastqc_file[21])
+            new_root.append(fastqc_file[30])
+            new_root.append(fastqc_file[32])
+            sequence = new_root[4]
+            fastqc = new_root[5]
+            samplename = new_root[6]
+            pathname = new_root[7]
+            trusqc = new_root[9]
+            flowcell = new_root[10]
+            lane = new_root[11]
+            row = new_root[12]
+            bs = new_root[14]
+            pbsq = new_root[15]
+            ptsq = new_root[16]
+            psqs = new_root[17]
+            pbsc = new_root[18]
+            psgc = new_root[19]
+            pbnc = new_root[20]
+            sld = new_root[21]
+            sdl = new_root[22]
+            oss = new_root[23]
+            ac = new_root[24]
+            tsqc = new_root[25]
+            sqclth = new_root[26]
+            gc = new_root[27]
             if Data2.objects.filter(Q(Sequence=sequence) & Q(Sample_name=samplename) &
                                     Q(Lane=lane) & Q(Row=row)).exists():
                 pass
@@ -249,25 +249,13 @@ def table_second():
 
 # Main Code
 @csrf_exempt
-def firs_data(request):
+def update_data(request):
     if request.user.is_authenticated:
         user = request.user
         table_first()
         null_value()
-        messages.success(request, f"Data1 Refresh Successfully. {user}")
-        return redirect('home')
-    else:
-        user = request.user
-        messages.error(request, f"Sorry {user} You are not authorized")
-        return redirect('home')
-
-
-@csrf_exempt
-def second_data(request):
-    if request.user.is_authenticated:
-        user = request.user
         table_second()
-        messages.success(request, f"Data2 Refresh Successfully. {user}")
+        messages.success(request, f"Data Refresh Successfully. {user}")
         return redirect('home')
     else:
         user = request.user
