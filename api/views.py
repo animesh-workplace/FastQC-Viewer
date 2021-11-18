@@ -103,6 +103,7 @@ def null_value():
             mdd = pat_path.index('media')
             now_pat = pat_path[mdd:]
             project = now_pat[2]
+            print(project, now_pat)
             pat = now_pat[3]
 
             if Data1.objects.filter(Q(Project=project) & Q(Patient=pat) & Q(Sequence='DNA')).exists():
